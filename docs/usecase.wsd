@@ -1,0 +1,85 @@
+@startuml use_case_diagram
+
+left to right direction
+
+
+package users {
+    actor "Student" as student
+
+    actor "Admin" as app_admin
+
+    package school {
+        actor "Admin" as school_admin
+        actor "Teacher" as teacher
+    }
+
+}
+
+actor "Guest" as guest
+
+package "Public" as public_cases {
+    usecase "View profiles" as view_profiles
+    usecase "View reviews" as view_reviews
+
+    guest --> view_profiles
+    guest --> view_reviews
+    users --> view_profiles
+    users --> view_reviews
+}
+
+package "Users" as user_base {
+    usecase "Login" as user_login
+    usecase "Follow school" as follow_school
+    usecase "Register as\nStudent" as register_student
+    usecase "Register as\nTeacher" as register_teacher
+    usecase "Register as\nSchool" as register_school
+
+    users --> user_login
+    users --> register_student
+    users --> register_teacher
+    users --> register_school
+    users --> follow_school
+}
+
+note right of user_base : All actions all users can take\nThe user should be logged in
+
+package "School" as school_cases {
+
+
+    package "Admin" as school_admin_cases {
+        usecase "Create course" as create_course
+        usecase "View course enrol id" as get_course_id
+        usecase "Send enrol\nrequest mail\nto mail addresses" as enrol_students
+        usecase "Add class\nto course" as add_class
+        usecase "Link teachers\nto classes" as add_teacher_to_class
+
+        school_admin --> create_course
+        create_course --> get_course_id
+        create_course --> enrol_students
+        create_course --> add_class
+        add_class --> add_teacher_to_class
+    }
+
+    package "Teacher" as school_teacher_cases {
+        usecase "View class reviews" as teacher_view_reviews
+
+        teacher --> teacher_view_reviews
+    }
+}
+
+package "Student" as student_cases {
+
+    usecase "Login" as student_login
+    usecase "Enrol in course" as enrol
+    usecase "Post a review\nof a class" as review_class
+    usecase "Like class" as like_class
+    usecase "Dislike class" as dislike_class
+
+    student --> student_login
+    student_login --> enrol
+    enrol --> review_class
+    student_login --> like_class
+    student_login --> dislike_class
+}
+
+@enduml
