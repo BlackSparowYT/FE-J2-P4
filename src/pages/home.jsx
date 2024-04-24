@@ -4,11 +4,9 @@ function App() {
 
   return (
     <main>
-        <section className="block block--header block--header-home">
+        <section className="block block-message">
             <div className="container">
-                <div className="text">
-                    <h1>Home</h1>
-                </div>
+              
             </div>
         </section>
     </main>

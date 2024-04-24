@@ -237,6 +237,7 @@
 }
 
 html { overflow-x: hidden; font-size: 10px; min-height: 100vh; background-color: var(--background); }
+body { display: grid; grid-template-columns: var(--sidebar-width) auto; }
 main { margin-top: var(--navbar-height); }
 
 h1, .h1 { --fs: var(--fs-x-large); --lh: 1; --fw: 900; }
@@ -271,9 +272,17 @@ button, .button { --fs: var(--fs-medium); --lh: 33px; --fw: 500; }
 
 /** Navbar **/
 
+header {  width: var(--sidebar-width); height: 100%; z-index: 1000; background-color: var(--background-850); }
+.sidebar {
+    display: flex;
+    justify-content: top;
+    align-items: center;
+    flex-direction: column;
+}
+
 /* Desktop Version */
 
-header { position: fixed !important; top: 0; left: 0; width: 100%; height: var(--navbar-height); z-index: 1000; background-color: var(--background-850); }
+header {  width: var(--sidebar-width); height: 100%; z-index: 1000; background-color: var(--background-850); }
 header nav { height: calc(var(--navbar-height) - 20px); margin: 10px auto; }
 header nav .da-icon { --clr: var(--text-clr); }
 header .navbar-desktop { height: 100%; border-radius: var(--border-radius); position: relative; width: 100%; z-index: 100; display: flex; justify-content: space-between; }
