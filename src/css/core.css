@@ -79,17 +79,13 @@
 
     /* Main Colors **/
 
-    --text-clr: #E4E4E4;
+    --text-clr: #F6E8EA;
     --text-clr-invert: #202020;
     --link-clr: #3578e5;
     --link-clr-invert: #3578e5;
 
     --hover-clr: #454950;
     --border-clr: #454950;
-
-    --bg-clr-light: #474747;
-    --bg-clr: #2E2E2E;
-    --bg-clr-dark: #242424;
     --bg-clr-invert-light: #DBDBDB;
     --bg-clr-invert: #D1D1D1;
     --bg-clr-invert-dark: #ACAAAA;
@@ -99,43 +95,61 @@
 
 
 
-    --primary: #202020;
-    --secondary: #f3f3f3;
-    --accent: #8FD4FF;
-    --secondary-accent: #255fa3;
+    --primary: #6033D1;
+    --secondary: #4920A3;
+    --accent: #00F2FF;
+    --background: #303236;
 
-    --primary-100: color-mix(in oklab, var(--primary) 10%, white);
-    --primary-200: color-mix(in oklab, var(--primary) 20%, white);
-    --primary-300: color-mix(in oklab, var(--primary) 30%, white);
-    --primary-400: color-mix(in oklab, var(--primary) 40%, white);
-    --primary-500: color-mix(in oklab, var(--primary) 50%, white);
-    --primary-600: color-mix(in oklab, var(--primary) 60%, white);
-    --primary-700: color-mix(in oklab, var(--primary) 70%, white);
-    --primary-800: color-mix(in oklab, var(--primary) 80%, white);
-    --primary-900: color-mix(in oklab, var(--primary) 90%, white);
-    --primary-1000: color-mix(in oklab, var(--primary) 100%, white);
+    
 
-    --secondary-100: color-mix(in oklab, var(--secondary) 10%, black);
-    --secondary-200: color-mix(in oklab, var(--secondary) 20%, black);
-    --secondary-300: color-mix(in oklab, var(--secondary) 30%, black);
-    --secondary-400: color-mix(in oklab, var(--secondary) 40%, black);
-    --secondary-500: color-mix(in oklab, var(--secondary) 50%, black);
-    --secondary-600: color-mix(in oklab, var(--secondary) 60%, black);
-    --secondary-700: color-mix(in oklab, var(--secondary) 70%, black);
-    --secondary-800: color-mix(in oklab, var(--secondary) 80%, black);
-    --secondary-900: color-mix(in oklab, var(--secondary) 90%, black);
-    --secondary-1000: color-mix(in oklab, var(--secondary) 100%, black);
-
-    --accent-100: color-mix(in oklab, var(--accent) 20%, white);
-    --accent-200: color-mix(in oklab, var(--accent) 40%, white);
-    --accent-300: color-mix(in oklab, var(--accent) 60%, white);
-    --accent-400: color-mix(in oklab, var(--accent) 80%, white);
-    --accent-600: color-mix(in oklab, var(--accent) 100%, black);
-    --accent-600: color-mix(in oklab, var(--accent) 90%, black);
-    --accent-700: color-mix(in oklab, var(--accent) 80%, black);
-    --accent-800: color-mix(in oklab, var(--accent) 70%, black);
-    --accent-900: color-mix(in oklab, var(--accent) 60%, black);
-    --accent-1000: color-mix(in oklab, var(--accent) 50%, black);
+    --background-50: #f2f2f3;
+    --background-100: #e4e5e7;
+    --background-200: #c9cbcf;
+    --background-300: #afb1b6;
+    --background-400: #94969e;
+    --background-500: #797c86;
+    --background-600: #61636b;
+    --background-700: #494b50;
+    --background-800: #303236; /* default */
+    --background-850: #232528;
+    --background-900: #1c1d1f;
+    --background-950: #141415;
+    
+    --primary-50: #efeafa;
+    --primary-100: #dfd5f6;
+    --primary-200: #beacec;
+    --primary-300: #9e82e3;
+    --primary-400: #7d59d9;
+    --primary-500: #5d2fd0; /* default */
+    --primary-600: #4a26a6;
+    --primary-700: #381c7d;
+    --primary-800: #251353;
+    --primary-900: #13092a;
+    --primary-950: #090515;
+    
+    --secondary-50: #efeafb;
+    --secondary-100: #dfd4f7;
+    --secondary-200: #bfaaee;
+    --secondary-300: #a07fe6;
+    --secondary-400: #8055dd;
+    --secondary-500: #602ad5; /* default */
+    --secondary-600: #4d22aa;
+    --secondary-700: #3a1980;
+    --secondary-800: #261155;
+    --secondary-900: #13082b;
+    --secondary-950: #0a0415;
+    
+    --accent-50: #e5feff;
+    --accent-100: #ccfcff;
+    --accent-200: #99faff;
+    --accent-300: #66f7ff;
+    --accent-400: #33f5ff;
+    --accent-500: #00f2ff; /* default */
+    --accent-600: #00c2cc;
+    --accent-700: #009199;
+    --accent-800: #006166;
+    --accent-900: #003033;
+    --accent-950: #00181a;
 
 
     /* Support Colors **/
@@ -222,7 +236,7 @@
     ;
 }
 
-html { background-color: var(--clr-background-tertairy); overflow-x: hidden; font-size: 10px; min-height: 100vh; background-color: var(--bg-clr); }
+html { overflow-x: hidden; font-size: 10px; min-height: 100vh; background-color: var(--background); }
 main { margin-top: var(--navbar-height); }
 
 h1, .h1 { --fs: var(--fs-x-large); --lh: 1; --fw: 900; }
@@ -259,7 +273,7 @@ button, .button { --fs: var(--fs-medium); --lh: 33px; --fw: 500; }
 
 /* Desktop Version */
 
-header { position: fixed !important; top: 0; left: 0; width: 100%; height: var(--navbar-height); z-index: 1000; background-color: var(--bg-clr-dark); }
+header { position: fixed !important; top: 0; left: 0; width: 100%; height: var(--navbar-height); z-index: 1000; background-color: var(--background-850); }
 header nav { height: calc(var(--navbar-height) - 20px); margin: 10px auto; }
 header nav .da-icon { --clr: var(--text-clr); }
 header .navbar-desktop { height: 100%; border-radius: var(--border-radius); position: relative; width: 100%; z-index: 100; display: flex; justify-content: space-between; }
@@ -411,12 +425,15 @@ footer { padding-top: 65px; }
 
 
 /** Backgrounds **/
-.bg--light { background-color: var(--bg-clr-light); }
-.bg--normal { background-color: var(--bg-clr); }
-.bg--dark { background-color: var(--bg-clr-dark); }
-.bg--invert-light { background-color: var(--bg-clr-invert-light); }
-.bg--invert-normal { background-color: var(--bg-clr-invert); }
-.bg--invert-dark { background-color: var(--bg-clr-invert-dark); }
+.bg--light { background-color: var(--background-600); }
+.bg--normal { background-color: var(--background); }
+.bg--dark { background-color: var(--background-900); }
+.bg--invert-light { background-color: var(--background-200); }
+.bg--invert-normal { background-color: var(--background-400); }
+.bg--invert-dark { background-color: var(--background-500); }
+.bg--primary { background-color: var(--primary); }
+.bg--secondary { background-color: var(--secondary); }
+.bg--accent { background-color: var(--accent); }
 
 
 /** Backgrounds **/
@@ -476,11 +493,12 @@ footer { padding-top: 65px; }
 
 .btn.btn--small { --padding: 0; --fs: 14px; min-height: 36px !important; min-width: min(100%, 260px) !important; }
 
-.btn.btn--primary { --clr: var(--text-clr-invert); --border: 1px solid var(--accent); --clr-bg: var(--accent); }
-.btn.btn--primary-outline { --clr: var(--accent); --border: 1px solid var(--accent); --clr-bg: transparent; }
-.btn.btn--secondary { --clr: var(--text-clr); --border: 1px solid var(--bg-clr); --clr-bg: var(--bg-clr-light); }
-.btn.btn--secondary:hover { --clr: var(--text-clr); --border: 1px solid var(--accent); --clr-bg: var(--bg-clr-light); }
-.btn.btn--secondary-outline { --clr: var(--text-clr-invert); --border: 1px solid var(--accent); --clr-bg: var(--accent); }
+.btn.btn--primary { --clr: var(--text-clr); --border: 1px solid var(--primary); --clr-bg: var(--primary); }
+.btn.btn--primary-outline { --clr: var(--primary); --border: 1px solid var(--primary); --clr-bg: transparent; }
+
+.btn.btn--secondary { --clr: var(--text-clr); --border: 1px solid var(--secondary); --clr-bg: var(--secondary); }
+.btn.btn--secondary-outline { --clr: var(--secondary); --border: 1px solid var(--secondary); --clr-bg: transparent; }
+
 .btn.btn--link { --clr: var(--accent); --fw: normal; text-decoration: underline; text-decoration-color: var(--accent); --fs: var(--fs-medium); }
 
 .btn.btn--danger { --clr: var(--text-clr-invert); --border: 1px solid var(--red-200); --clr-bg: var(--red-200); }
@@ -507,23 +525,20 @@ footer { padding-top: 65px; }
 /** Header > Home **/
 
 .block.block--header.block--header-home { min-height: calc(100vh - var(--navbar-height)); display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: var(--bg-clr); background-image: url(../images/hero-background.svg); background-size: cover; background-position: top; }
-.block.block--header.block--header-home *:is(h1,h2,h3) { --lh: 1.25; text-align: center; background: var(--accent); background: radial-gradient(50% 80% at center, var(--accent) 0%, var(--text-clr) 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.block.block--header.block--header-home .da-icon { --w: 60px; --h: 60px; --clr: var(--accent); position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); opacity: .7; }
+.block.block--header.block--header-home *:is(h1,h2,h3) { --lh: 1.25; text-align: center; color: var(--primary); }
+.block.block--header.block--header-home .da-icon { --w: 60px; --h: 60px; --clr: var(--primary); position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); opacity: .7; }
 
 
 /** Header > Subpage **/
 
 .block.block--header.block--header-subpage { min-height: calc(60vh - var(--navbar-height)); display: flex; align-items: center; justify-content: center; flex-direction: column; background-color: var(--bg-clr); background-image: url(../images/hero-background.svg); background-size: cover; background-position: top; }
-.block.block--header.block--header-subpage *:is(h1,h2,h3) { --lh: 1.25; text-align: center; background: var(--accent); background: radial-gradient(50% 80% at center, var(--accent) 0%, var(--text-clr) 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.block.block--header.block--header-subpage *:is(h1,h2,h3) { --lh: 1.25; text-align: center; color: var(--primary); }
 
 
 
 
 
 /*** Blocks ***/
-
-.block .header { padding-bottom: 20px; }
-
 
 /** Blocks > Text **/
 
@@ -537,7 +552,6 @@ footer { padding-top: 65px; }
 .block.text .text:has(img) div { margin-bottom: 0; max-width: 100%; }
 .block.text .text:has(img) div p { margin-bottom: 0; max-width: 100%; }
 .block.text .text img { width: 100%; height: 100%; max-height: 500px; border-radius: 20px; object-fit: cover; object-position: center; }
-.block.block--over-mij.text .text img { width: 100%; height: 100%; max-height: 500px; border-radius: 20px; object-fit: contain; object-position: bottom; }
 
 @media (min-width:1200px) {
     .block.text .text:has(img) { flex-wrap: nowrap; }
