@@ -15,7 +15,6 @@ function App() {
                 <Route path='/404' Component={Error404} />
                 <Route path='*' Component={Error404} />
             </Routes>
-            <Footer />
         </BrowserRouter>
     );
 }

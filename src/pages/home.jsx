@@ -6,7 +6,7 @@ function App() {
     <main>
         <section className="block block-message">
             <div className="container">
-              
+                
             </div>
         </section>
     </main>
