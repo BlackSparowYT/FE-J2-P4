@@ -273,9 +273,11 @@ button, .button { --fs: var(--fs-medium); --lh: 33px; --fw: 500; }
 /** Navbar **/
 
 header {  width: var(--sidebar-width); height: 100vh; z-index: 1000; background-color: var(--background-850); }
-.sidebar { height: 100%; display: flex; justify-content: top; align-items: center; flex-direction: column; }
-
-
+.sidebar { height: 100%; display: flex; justify-content: top; align-items: center; flex-direction: column; padding: 40px 20px;  }
+.sidebar__logo { width: 100%; margin-bottom: 20px;}
+.sidebar__items { width: 100%; display: flex; justify-content: center; flex-direction: column; }
+.sidebar__items .item:not(:last-child) { padding-bottom: 10px; }
+.sidebar__items--bottom {  }
 /* Desktop Version */
 
 /* header {  width: var(--sidebar-width); height: 100%; z-index: 1000; background-color: var(--background-850); }
