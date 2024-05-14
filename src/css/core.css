@@ -278,7 +278,7 @@ header {  width: var(--sidebar-width); height: 100vh; z-index: 1000; background-
 .sidebar__items { width: 100%; display: flex; justify-content: center; flex-direction: column; }
 .sidebar__items .item:not(:last-child) { padding-bottom: 10px; display: flex; justify-content: center; flex-direction: column;  }
 .sidebar__items--bottom {  width: 100%; margin-top: auto; display: flex; flex-direction: column;}
-.sidebar__items--bottom .item { padding-bottom: 10px; }
+.sidebar__items--bottom .item:not(:last-child) { padding-bottom: 10px; }
 
 
 /* Desktop Version */
