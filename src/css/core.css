@@ -1,6 +1,6 @@
 /** Import CSS for other pages **/
 
-@import url('https://cdn.vacso.cloud/icons/css/icons.min.css');
+@import url('https://cdn.vacso.cloud/icons/css/veloxi.min.css');
 /*@import url('./account.css');*/
 
 
@@ -244,7 +244,7 @@ h1, .h1 { --fs: var(--fs-x-large); --lh: 1; --fw: 900; }
 h2, .h2 { --fs: var(--fs-large); --lh: 1; --fw: 900; }
 h3, .h3 { --fs: var(--fs-medium); --lh: 1; --fw: 700;}
 h4, .h4 { --fs: var(--fs-medium); --lh: 1; --fw: normal; }
-p, .p { --fs: var(--fs-medium); --lh: 33px; --fw: normal; }
+p, .p { --fs: var(--fs-medium); --lh: 26px; --fw: normal; }
 a { --fs: var(--fs-x-small); --lh: 1; text-decoration: none; }
 li, .li { --fs: var(--fs-medium); --lh: 33px; --fw: normal; }
 span, .span { --fs: var(--fs-medium); --lh: 33px; --fw: normal; }
@@ -273,13 +273,16 @@ button, .button { --fs: var(--fs-medium); --lh: 33px; --fw: 500; }
 /** Navbar **/
 
 header {  width: var(--sidebar-width); height: 100vh; z-index: 1000; background-color: var(--background-850); }
-.sidebar { height: 100%; display: flex; justify-content: top; align-items: center; flex-direction: column; padding: 40px 20px;  }
-.sidebar__logo { width: 100%; margin-bottom: 20px;}
-.sidebar__items { width: 100%; display: flex; justify-content: center; flex-direction: column; }
-.sidebar__items .item:not(:last-child) { padding-bottom: 10px; display: flex; justify-content: center; flex-direction: column;  }
-.sidebar__items--bottom {  width: 100%; margin-top: auto; display: flex; flex-direction: column;}
-.sidebar__items--bottom .item:not(:last-child) { padding-bottom: 10px; }
+.sidebar { height: 100%; display: flex; justify-content: top; align-items: center; flex-direction: column; padding: 20px 20px;  }
+.sidebar__logo { width: 100%; margin-bottom: 30px;}
 
+.sidebar__items { width: 100%; display: flex; justify-content: center; flex-direction: column; }
+.sidebar__items--bottom {  width: 100%; margin-top: auto; display: flex; flex-direction: column;}
+
+.sidebar__items .item { display: flex; gap: 10px; align-items: center; }
+.sidebar__items .item:not(:last-child) { padding-bottom: 20px;  }
+.sidebar__items .item p { --fs: 28px; }
+.sidebar__items .item .vlx-icon {  --w: 24px; --h: 24px; --clr: var(--text-clr); }
 
 /* Desktop Version */
 
