@@ -1,0 +1,17 @@
+.vlx-card {}
+.vlx-card .vlx-card__header {}
+.vlx-card .vlx-card__body {}
+.vlx-card .vlx-card__footer {}
+
+
+.vlx-card--post { background-color: var(--background-100); border: 1px solid var(--background-100); }
+.vlx-card--post .vlx-card__header { display: flex; justify-content: start; align-items: end; gap: 10px; }
+.vlx-card--post .vlx-card__time { --fs: 16px; opacity: .6; }
+.vlx-card--post .vlx-card__body { padding-top: 10px; display: flex; justify-content: space-between; align-items: start; }
+.vlx-card--post .vlx-card__footer { }
+
+
+
+
+.vlx-block--messages { }
+.vlx-block--messages .container { grid-column: minmax(0,1fr); }

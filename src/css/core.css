@@ -79,8 +79,8 @@
 
     /* Main Colors **/
 
-    --text-clr: #F6E8EA;
-    --text-clr-invert: #202020;
+    --text-clr: #202020;
+    --text-clr-invert: #F6E8EA;
     --link-clr: #3578e5;
     --link-clr-invert: #3578e5;
 
@@ -95,25 +95,24 @@
 
 
 
-    --primary: #6033D1;
-    --secondary: #4920A3;
-    --accent: #00F2FF;
-    --background: #303236;
+    --primary: #e0f3d8;
+    --secondary: #e0f3d8;
+    --accent: #5de619;
+    --background: var(--background-50);
 
     
 
-    --background-50: #f2f2f3;
-    --background-100: #e4e5e7;
-    --background-200: #c9cbcf;
-    --background-300: #afb1b6;
-    --background-400: #94969e;
-    --background-500: #797c86;
-    --background-600: #61636b;
-    --background-700: #494b50;
-    --background-800: #303236; /* default */
-    --background-850: #232528;
-    --background-900: #1c1d1f;
-    --background-950: #141415;
+    --background-50: #eff9eb; /* default */
+    --background-100: #e0f3d8;
+    --background-200: #c0e8b0;
+    --background-300: #a1dc89;
+    --background-400: #81d062;
+    --background-500: #62c43b;
+    --background-600: #4e9d2f;
+    --background-700: #3b7623;
+    --background-800: #274f17;
+    --background-900: #14270c;
+    --background-950: #0a1406;
     
     --primary-50: #efeafa;
     --primary-100: #dfd5f6;
@@ -139,17 +138,18 @@
     --secondary-900: #13082b;
     --secondary-950: #0a0415;
     
-    --accent-50: #e5feff;
-    --accent-100: #ccfcff;
-    --accent-200: #99faff;
-    --accent-300: #66f7ff;
-    --accent-400: #33f5ff;
-    --accent-500: #00f2ff; /* default */
-    --accent-600: #00c2cc;
-    --accent-700: #009199;
-    --accent-800: #006166;
-    --accent-900: #003033;
-    --accent-950: #00181a;
+
+    --accent-50: #effce8;
+    --accent-100: #dffad1;
+    --accent-200: #bef5a3;
+    --accent-300: #9ef075;
+    --accent-400: #7eeb47;
+    --accent-500: #5de619; /* default */
+    --accent-600: #4bb814;
+    --accent-700: #388a0f;
+    --accent-800: #255c0a;
+    --accent-900: #132e05;
+    --accent-950: #091703;
 
 
     /* Support Colors **/
@@ -240,9 +240,9 @@ html { overflow-x: hidden; font-size: 10px; min-height: 100vh; background-color:
 body { display: grid; grid-template-columns: var(--sidebar-width) auto; }
 
 
-h1, .h1 { --fs: var(--fs-x-large); --lh: 1; --fw: 900; }
-h2, .h2 { --fs: var(--fs-large); --lh: 1; --fw: 900; }
-h3, .h3 { --fs: var(--fs-medium); --lh: 1; --fw: 700;}
+h1, .h1 { --fs: var(--fs-x-large); --lh: 1; --fw: 900; --clr: var(--accent-800) !important; }
+h2, .h2 { --fs: var(--fs-large); --lh: 1; --fw: 900; --clr: var(--accent-800) !important; }
+h3, .h3 { --fs: var(--fs-medium); --lh: 1; --fw: 700; --clr: var(--accent-800) !important; }
 h4, .h4 { --fs: var(--fs-medium); --lh: 1; --fw: normal; }
 p, .p { --fs: var(--fs-medium); --lh: 26px; --fw: normal; }
 a { --fs: var(--fs-x-small); --lh: 1; text-decoration: none; }
@@ -272,8 +272,8 @@ button, .button { --fs: var(--fs-medium); --lh: 33px; --fw: 500; }
 
 /** Navbar **/
 
-header {  width: var(--sidebar-width); height: 100vh; z-index: 1000; background-color: var(--background-850); }
-.sidebar { height: 100%; display: flex; justify-content: top; align-items: center; flex-direction: column; padding: 20px 20px;  }
+header { position: relative; width: var(--sidebar-width); height: 100vh; z-index: 1000; }
+.sidebar { position: fixed; top: 0; left: 0; height: 100vh; background-color: var(--background-100); display: flex; justify-content: top; align-items: center; flex-direction: column; padding: 20px 20px; }
 .sidebar__logo { width: 100%; margin-bottom: 30px;}
 
 .sidebar__items { width: 100%; display: flex; justify-content: center; flex-direction: column; }
