@@ -1,10 +1,8 @@
-import React from 'react'
-
+import * as React from "react";
+import Card from "@mui/joy/Card";
 
 const Login = () => {
-  return (
-    <></>
-  )
-}
+  return <Card />
+};
 
-export default Login
+export default Login;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Sidebar() {
   localStorage.setItem("login", false);
 
-  const isLoggedIn = localStorage.getItem("login") === "true";
+  const isLoggedIn = localStorage.getItem("login") === "false";
 
   return (
     <header>
@@ -41,7 +41,7 @@ function Sidebar() {
               </Link>
             </>
           ) : (
-            <Link className="item" to={"/login"}>
+            <Link className="item" to={"/account/login"}>
               <i className="vlx-icon vlx-icon--right-to-bracket"></i>
               <p>Login</p>
             </Link>
