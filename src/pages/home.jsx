@@ -2,7 +2,7 @@ import { set } from 'firebase/database'
 import { React, useEffect, useState } from 'react'
 import Post from '../components/cards/post'
 
-function App() {
+function Home() {
 
     const [posts, setPosts] = useState([])
 
@@ -35,17 +35,17 @@ function App() {
         ])
     }, [])
 
-  return (
-    <main>
-        <section className="vlx-block vlx-block--messages">
-            <div className="container d-grid g-20">
-                {posts?.map((item) => (
-                    <Post key={item.id} args={item} />
-                ))}
-            </div>
-        </section>
-    </main>
-  )
+    return (
+        <main>
+            <section className="vlx-block vlx-block--messages">
+                <div className="container d-grid g-20">
+                    {posts?.map((item) => (
+                        <Post key={item.id} args={item} />
+                    ))}
+                </div>
+            </section>
+        </main>
+    )
 }
 
-export default App
+export default Home

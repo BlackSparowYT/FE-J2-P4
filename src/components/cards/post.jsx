@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function Post(props) {
+function CardPost(props) {
 
     const args = props.args;
 
@@ -28,4 +28,4 @@ function Post(props) {
     );
 }
 
-export default Post;
+export default CardPost;

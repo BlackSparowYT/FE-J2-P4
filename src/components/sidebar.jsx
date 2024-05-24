@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Sidebar() {
   localStorage.setItem("login", false);
 
   const isLoggedIn = localStorage.getItem("login") === "true";
@@ -52,4 +52,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Sidebar;
