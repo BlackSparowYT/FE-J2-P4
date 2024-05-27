@@ -16,6 +16,7 @@
 .vlx-error-page { display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100%; width: 100%; }
 .vlx-error-page .vlx-code { --fs: clamp(80px, 10vw, 120px); }
 
+.vlx-search .vlx-header input { width: 100%; }
 
 .vlx-block--posts { }
 .vlx-block--posts .container { grid-column: minmax(0,1fr); }
