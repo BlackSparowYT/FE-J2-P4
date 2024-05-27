@@ -1,16 +1,14 @@
-
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import firebase from "../firebase";
-import { addDoc, doc, setDoc, updateDoc } from "firebase/firestore";
+import { Firestore, addDoc, deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
 class UserClass {
     login = async (mail, password) => {
-        signInWithEmailAndPassword(firebase.auth, mail, password)
+        await signInWithEmailAndPassword(firebase.auth, mail, password)
         .then((userCredential) => {
             return true;
         })
         .catch((error) => {
-
             return false;
         });
     }
@@ -32,15 +30,51 @@ class UserClass {
     }
 
     isSchool = async () => {
+        if (this.isLoggedIn()) {
+            const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
+                return userDoc.data.userType == "school";
+            }).catch((error) => {
 
+            });
+        }
+
+        return false;
     }
 
     isTeacher = async () => {
+        if (this.isLoggedIn()) {
+            const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
+                return userDoc.data.userType == "teacher";
+            }).catch((error) => {
 
+            });
+        }
+
+        return false;
     }
 
     isStudent = async () => {
+        if (this.isLoggedIn()) {
+            const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
+                return userDoc.data.userType == "student";
+            }).catch((error) => {
 
+            });
+        }
+
+        return false;
+    }
+
+    isAdmin = async() => {
+        if (this.isLoggedIn()) {
+            const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
+                return userDoc.data.userType == "admin";
+            }).catch((error) => {
+
+            });
+        }
+
+        return false;
     }
 
     getName = () => {
@@ -72,7 +106,12 @@ class UserClass {
     }
 
     deleteUser = async() => {
-        console.warn("deleteUser not yet implemented!");
+        if (firebase.auth.currentUser) {
+            await deleteDoc(doc(firebase.db, "users", firebase.auth.currentUser.uid));
+            await firebase.auth.currentUser.delete();
+        } else {
+            console.warn("User is not logged in, log in before removing yourself as user");
+        }
     }
 }
 
