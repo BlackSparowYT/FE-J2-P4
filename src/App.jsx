@@ -54,6 +54,7 @@ function App() {
       }
       <Routes>
         <Route path="/" Component={Home} />
+        <Route path='/zoeken' Component={Search} />
         <Route path="/404" Component={Error404} />
         <Route path="*" Component={Error404} />
           
