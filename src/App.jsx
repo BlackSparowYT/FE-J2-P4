@@ -4,7 +4,10 @@ import firebase from "./firebase.js";
 
 import Sidebar from "./components/sidebar.jsx";
 // import Footer from './components/footer.jsx';
-
+import Home from './pages/home.jsx';
+import Search from './pages/search.jsx';
+import Error404 from './pages/404.jsx';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home.jsx";
 import Error404 from "./pages/404.jsx";
 import Login from "./pages/auth/login.jsx";
