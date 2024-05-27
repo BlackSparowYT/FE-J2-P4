@@ -6,12 +6,16 @@
 
 .vlx-card--post { background-color: var(--background-100); border: 1px solid var(--background-100); }
 .vlx-card--post .vlx-card__header { display: flex; justify-content: start; align-items: end; gap: 10px; }
+.vlx-card--post .vlx-card__user { --fs: 20px; opacity: .8; }
 .vlx-card--post .vlx-card__time { --fs: 16px; opacity: .6; }
 .vlx-card--post .vlx-card__body { padding-top: 10px; display: flex; justify-content: space-between; align-items: start; }
+.vlx-card--post .vlx-content__title { margin-bottom: 10px; }
 .vlx-card--post .vlx-card__footer { }
 
 
+.vlx-error-page { display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100%; width: 100%; }
+.vlx-error-page .vlx-code { --fs: clamp(80px, 10vw, 120px); }
 
 
-.vlx-block--messages { }
-.vlx-block--messages .container { grid-column: minmax(0,1fr); }
+.vlx-block--posts { }
+.vlx-block--posts .container { grid-column: minmax(0,1fr); }

@@ -1,6 +1,6 @@
 import { set } from 'firebase/database'
 import { React, useEffect, useState } from 'react'
-import Post from '../components/cards/post'
+import PostsBlock from '../components/blocks/posts'
 
 function Home() {
 
@@ -35,15 +35,14 @@ function Home() {
         ])
     }, [])
 
+    const args = {
+        block: {},
+        posts: posts
+    }
+
     return (
         <main>
-            <section className="vlx-block vlx-block--messages">
-                <div className="container d-grid g-20">
-                    {posts?.map((item) => (
-                        <Post key={item.id} args={item} />
-                    ))}
-                </div>
-            </section>
+            <PostsBlock args={args}/>
         </main>
     )
 }

@@ -2,10 +2,10 @@ import { set } from 'firebase/database'
 import { React, useEffect, useState } from 'react'
 import Post from '../cards/post'
 
-function BlockMessages(props) {
+function BlockPosts(props) {
 
     const args = props.args;
-    const block_name = "messages";
+    const block_name = "posts";
 
     const block = {};
     block.id = args.block.id ?? "block-" + block_name +"" + (Math.random() + 1).toString(36).substring(7);
@@ -35,4 +35,4 @@ function BlockMessages(props) {
     )
 }
 
-export default BlockMessages
+export default BlockPosts

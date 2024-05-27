@@ -273,7 +273,7 @@ button, .button { --fs: var(--fs-medium); --lh: 33px; --fw: 500; }
 /** Navbar **/
 
 header { position: relative; width: var(--sidebar-width); height: 100vh; z-index: 1000; }
-.sidebar { position: fixed; top: 0; left: 0; height: 100vh; background-color: var(--background-100); display: flex; justify-content: top; align-items: center; flex-direction: column; padding: 20px 20px; }
+.sidebar { position: fixed; width: var(--sidebar-width); top: 0; left: 0; height: 100vh; background-color: var(--background-100); display: flex; justify-content: top; align-items: center; flex-direction: column; padding: 20px 20px; }
 .sidebar__logo { width: 100%; margin-bottom: 30px;}
 
 .sidebar__items { width: 100%; display: flex; justify-content: center; flex-direction: column; }
