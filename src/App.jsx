@@ -25,7 +25,6 @@ function App() {
   const [showSidebar, setShowSidebar] = useState(true);
   const location = useLocation();
 
-
   useEffect(() => {
     const url = window.location.href;
     if (url.includes("/auth")) {
