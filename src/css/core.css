@@ -468,7 +468,7 @@ footer { padding-top: 65px; }
 
 
 /** Inputs **/
-*:is(input, .input) { background-color: var(--primary); outline: 0; border: 1px solid var(--border-clr); border-radius: var(--border-radius-0-5x); }
+*:is(input, .input) { padding: 5px 10px; background-color: var(--primary); outline: 0; border: 1px solid var(--border-clr); border-radius: var(--border-radius-0-5x); }
 *:is(input, .input):hover { border: 1px solid var(--accent); }
 *:is(input, .input):focus { border: 1px solid var(--accent); }
 
