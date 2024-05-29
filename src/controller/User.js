@@ -102,7 +102,7 @@ class UserClass {
             return false;
         })
 
-
+        
     }
 
     deleteUser = async() => {
