@@ -1,4 +1,3 @@
-import { set } from 'firebase/database'
 import { React, useEffect, useState } from 'react'
 import PostsBlock from '../components/blocks/posts'
 
