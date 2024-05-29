@@ -580,6 +580,19 @@ footer { padding-top: 65px; }
 
 
 
+.vlx-form {}
+.vlx-form { --gc: 1; display: grid; grid-template-columns: repeat(var(--gc), minmax(0,1fr)); }
+.vlx-form__section { padding: 20px; }
+.vlx-form__section *:is(input, textarea) { width: 100%; }
+
+@media (min-width: 768px) {
+    .vlx-form { --gc: 2; }
+}
+
+
+
+
+
 /*** Cards ***/
 
 .vlx-card { --p: 2rem; padding: var(--p); border-radius: var(--border-radius); border: 1px solid var(--border-clr); position: relative; }
