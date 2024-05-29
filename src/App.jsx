@@ -4,6 +4,7 @@ import Header from "./components/sidebar.jsx";
 import Home from "./pages/home.jsx";
 import Error404 from "./pages/404.jsx";
 import Login from "./pages/auth/login.jsx";
+import Logout from "./pages/auth/Logout.jsx";
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/404" Component={Error404} />
         <Route path="*" Component={Error404} />
         <Route path="/account/login" Component={Login} />
+        <Route path="/account/logout" Component={Logout} />
       </Routes>
     </>
   );

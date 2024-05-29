@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Sidebar() {
   localStorage.setItem("login", false);
 
-  const isLoggedIn = localStorage.getItem("login") === "false";
+  const isLoggedIn = localStorage.getItem("login") === "true";
 
   return (
     <header>
