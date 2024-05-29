@@ -5,6 +5,7 @@ import firebase from '../../firebase.js';
 
 const Logout = () => {
   const navigate = useNavigate();
+  console.error('test')
 
   try {
     signOut(firebase.auth);
@@ -12,9 +13,7 @@ const Logout = () => {
     console.error(err)
   }
 
-  useEffect(() => {
-    navigate('/');
-  }, [signOut(firebase.auth)])
+  navigate('/');
 
   return (
     <h1>Logging out</h1>

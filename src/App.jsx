@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/sidebar.jsx";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import firebase from "./firebase.js";
+import Sidebar from "./components/sidebar.jsx";
 // import Footer from './components/footer.jsx';
 import Home from "./pages/home.jsx";
 import Error404 from "./pages/404.jsx";
@@ -9,22 +11,32 @@ import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const location = useLocation();
+
   useEffect(() => {
     const url = window.location.href;
-    if (url.includes("account")) {
+    if (url.includes("/account")) {
       setShowSidebar(false);
     } else {
       setShowSidebar(true);
     }
   }, [location]);
 
-  console.log(showSidebar);
-
+  onAuthStateChanged(getAuth(), (user) => {
+    if (user) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }); 
+  
   return (
     <>
-      {showSidebar ? <Header /> : null}
+      {
+        showSidebar ? <Sidebar isloggedin={isLoggedIn} /> : null
+      }
       <Routes>
         <Route path="/" Component={Home} />
         <Route path="/404" Component={Error404} />

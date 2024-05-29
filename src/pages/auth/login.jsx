@@ -28,7 +28,8 @@ const Login = () => {
             navigate('/');
         } catch (err) {
             console.error(err);
-            setOpen(true);
+            navigate('/');
+
         }
     }
 
