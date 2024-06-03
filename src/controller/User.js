@@ -65,6 +65,28 @@ class UserClass {
         return false;
     }
 
+    getUserName = async () => {
+        if (this.isLoggedIn()) {
+            const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
+                return userDoc.data.displayName;
+            }).catch((error) => {
+
+            });
+        }
+        return false;
+    }
+
+    getUserNameById = async (uid) => {
+        if (this.isLoggedIn()) {
+            const userDoc = await getDoc(firebase.db, "users", uid).then(() => {
+                return userDoc.data.displayName;
+            }).catch((error) => {
+
+            });
+        }
+        return false;
+    }
+
     isAdmin = async() => {
         if (this.isLoggedIn()) {
             const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
