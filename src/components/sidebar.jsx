@@ -1,15 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faFolderOpen, faHouse, faRightFromBracket, faRightToBracket, faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
 
-function Sidebar() {
-  localStorage.setItem("login", false);
 
-  const isLoggedIn = localStorage.getItem("login") === "true";
+function Sidebar(props) {
+
+  const LinkTo = (to, icon, title) => {
+    return (
+      <Link className='item' to={to}>
+        <FontAwesomeIcon icon={icon} /> <p>{title}</p>
+      </Link>
+    );
+  };
 
   return (
     <header>
-      <a>{isLoggedIn}</a>
-
+    {props.isloggedin }
       <div className="sidebar">
         <div className="sidebar__logo">
           <h2>Vak Roddels</h2>
@@ -29,23 +36,15 @@ function Sidebar() {
           </Link>
         </div>
         <div className="sidebar__items sidebar__items--bottom">
-          {isLoggedIn ? (
+          {props.isloggedin ?
             <>
-              <Link className="item" to={"/account/settings"}>
-                <i className="vlx-icon vlx-icon--gear"></i>
-                <p>Settings</p>
-              </Link>
-              <Link className="item" to={"/account/logout"}>
-                <i className="vlx-icon vlx-icon--right-from-bracket"></i>
-                <p>Logout</p>
-              </Link>
+              {LinkTo('/account/settings', faGear, 'Settings')}
+              {LinkTo('/account/logout', faRightFromBracket, 'Logout')}
             </>
-          ) : (
-            <Link className="item" to={"/login"}>
-              <i className="vlx-icon vlx-icon--right-to-bracket"></i>
-              <p>Login</p>
-            </Link>
-          )}
+            :
+            LinkTo('/account/login', faRightToBracket, 'Login')
+            
+          }
         </div>
       </div>
     </header>

@@ -1,0 +1,11 @@
+.vlx-login { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #E0f3d8; }
+.vlx-login .container { display: flex; justify-content: center; align-items: center; }
+.vlx-login .container .inner { min-width: 650px; display: flex; justify-content: center; align-items: center; }
+.vlx-login .container .inner h3 { text-align: left; margin-top: 10px; }
+.vlx-login .container .inner h3, h1, a {  color: "#255c0a" !important; }
+.vlx-login .container .inner a { opacity: .6; }
+.vlx-login .container .inner .btn-group { flex-direction: column; gap: 10px; }
+.vlx-login .container .inner input {font-size: 20px !important; }
+
+
+#root {margin: 0; padding: 0; text-align: center; box-sizing: border-box;}
