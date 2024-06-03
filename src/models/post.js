@@ -3,7 +3,7 @@ import firebase from "../firebase";
 
 const postRef = collection(firebase.db, "posts");
 
-const PostController = {
+const PostModel = {
 
     getAll: async () => {
         const q = query(postRef, where("isPublic","==",true))
@@ -96,4 +96,4 @@ const PostController = {
     },
 }
 
-export default PostController;
+export default PostModel;
