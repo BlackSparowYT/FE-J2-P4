@@ -18,6 +18,7 @@ const Register = () => {
   const [verifypassword, setVerifyPassword] = useState('');
   const [showPasswordBool, setShowPasswordBool] = useState(false);
   const [showVerifyPasswordBool, setShowVerifyPasswordBool] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ const Register = () => {
   };
 
   const signUp = async () => {
+    setLoading(true);
     try {
       await User.signUp(userName, email, password, "student")
       navigate('/');
@@ -38,6 +40,7 @@ const Register = () => {
       navigate('/');
 
     }
+    setLoading(false);
   }
 
   return (
@@ -94,7 +97,7 @@ const Register = () => {
                     )}
                   </IconButton>
                 }
-              />  
+              />
               {errorMessage && (
                 <div style={{ color: 'red', marginTop: '10px' }}>
                   {errorMessage}
@@ -112,7 +115,7 @@ const Register = () => {
                       backgroundColor: "#255c0a",
                     },
                   }}
-
+                  loading={isLoading}
                   onClick={signUp}
                 >
                   Registreer

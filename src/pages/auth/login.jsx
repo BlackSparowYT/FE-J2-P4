@@ -9,12 +9,14 @@ import IconButton from "@mui/joy/IconButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from '@mui/joy/Snackbar';
+import { set } from 'firebase/database';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPasswordBool, setShowPasswordBool] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
@@ -23,14 +25,15 @@ const Login = () => {
     };
 
     const signIn = async () => {
+        setLoading(true);
         try {
             await signInWithEmailAndPassword(firebase.auth, email, password)
             navigate('/');
         } catch (err) {
             console.error(err);
             navigate('/');
-
         }
+        setLoading(false);
     }
 
     return (
@@ -88,6 +91,7 @@ const Login = () => {
                                         },
                                         }}
                                     onClick={signIn}
+                                    loading={isLoading}
                                 >
                                     Login
                                 </Button>
