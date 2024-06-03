@@ -65,9 +65,9 @@ const Login = () => {
                                 endDecorator={
                                     <IconButton onClick={showPassword}>
                                         {showPasswordBool ? (
-                                            <FontAwesomeIcon icon={faEye} />
-                                        ) : (
                                             <FontAwesomeIcon icon={faEyeSlash} />
+                                        ) : (
+                                            <FontAwesomeIcon icon={faEye} />
                                         )}
                                     </IconButton>
                                 }
@@ -101,8 +101,9 @@ const Login = () => {
                                     }}
                                     onClick={() => navigate('/account/register')}
                                 >
-                                    Register
+                                    Registreer
                                 </Button>
+                                <Link to={"/"}>home</Link>
                             </div>
                         </Card>
                     </div>

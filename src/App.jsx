@@ -6,7 +6,8 @@ import Sidebar from "./components/sidebar.jsx";
 import Home from "./pages/home.jsx";
 import Error404 from "./pages/404.jsx";
 import Login from "./pages/auth/login.jsx";
-import Logout from "./pages/auth/Logout.jsx";
+import Register from "./pages/auth/register.jsx";
+import Logout from "./pages/auth/logout.jsx";
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -29,10 +30,8 @@ function App() {
     onAuthStateChanged(getAuth(), (user) => {
       if (user) {
         setIsLoggedIn(true);
-        setLoading(false);
       } else {
         setIsLoggedIn(false);
-        setLoading(false);
       }
     });
   }, [firebase.auth.currentUser]);
@@ -48,6 +47,7 @@ function App() {
         <Route path="/404" Component={Error404} />
         <Route path="*" Component={Error404} />
         <Route path="/account/login" Component={Login} />
+        <Route path="/account/register" Component={Register} />
         <Route path="/account/logout" Component={Logout} />
       </Routes>
     </>
