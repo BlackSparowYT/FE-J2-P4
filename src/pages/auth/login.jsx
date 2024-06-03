@@ -43,60 +43,69 @@ const Login = () => {
             >
                 Wrong password or email
             </Snackbar>
-            <section className="login">
+            <section className="vlx-login">
                 <div className='container'>
-                    <Card
-                        sx={{
-                            height: "60%",
-                            width: "60%",
-                            padding: "20px",
-                            textAlign: "center",
-                        }}
-                    >
-                        <h1 className='login__title'>Login</h1>
+                    <div className="inner">
+                        <Card
+                            sx={{
+                                height: "60%",
+                                width: "60%",
+                                padding: "20px",
+                                textAlign: "center",
+                            }}
+                        >
+                            <h1 className='login__title'>Login</h1>
 
-                        <h3>Email</h3>
-                        <Input type="email" onChange={(e) => setEmail(e.target.value)} />
-                        <h3>Password</h3>
-                        <Input
-                            type={showPasswordBool ? "text" : "password"}
-                            onChange={(e) => setPassword(e.target.value)}
-                            endDecorator={
-                                <IconButton onClick={showPassword}>
-                                    {showPasswordBool ? (
-                                        <FontAwesomeIcon icon={faEye} />
-                                    ) : (
-                                        <FontAwesomeIcon icon={faEyeSlash} />
-                                    )}
-                                </IconButton>
-                            }
-                        />
-                        {errorMessage && (
-                            <div style={{ color: 'red', marginTop: '10px' }}>
-                                {errorMessage}
+                            <h3>Email</h3>
+                            <Input type="email" onChange={(e) => setEmail(e.target.value)} />
+                            <h3>Password</h3>
+                            <Input
+                                type={showPasswordBool ? "text" : "password"}
+                                onChange={(e) => setPassword(e.target.value)}
+                                endDecorator={
+                                    <IconButton onClick={showPassword}>
+                                        {showPasswordBool ? (
+                                            <FontAwesomeIcon icon={faEye} />
+                                        ) : (
+                                            <FontAwesomeIcon icon={faEyeSlash} />
+                                        )}
+                                    </IconButton>
+                                }
+                            />
+                            {errorMessage && (
+                                <div style={{ color: 'red', marginTop: '10px' }}>
+                                    {errorMessage}
+                                </div>
+                            )}
+                            <div className="btn-group">
+                                <Button
+                                    variant="solid"
+                                    sx={{
+                                        width: "50%",
+                                        backgroundColor: "#255c0a",
+                                        ":hover" : {
+                                            backgroundColor: "#255c0a",
+                                        },
+                                        }}
+                                    onClick={signIn}
+                                >
+                                    Login
+                                </Button>
+                                <Button
+                                    variant="outlined"
+
+                                    sx={{
+                                        width: "50%",
+                                        color: "#255c0a",
+                                        borderColor: "#255c0a",
+                                    }}
+                                    onClick={() => navigate('/account/register')}
+                                >
+                                    Register
+                                </Button>
                             </div>
-                        )}
-                        <div className="btn-group">
-                            <Button
-                                variant="solid"
-                                sx={{
-                                    width: "50%",
-                                }}
-                                onClick={signIn}
-                            >
-                                Login
-                            </Button>
-                            <Button
-                                variant="outlined"
-                                sx={{
-                                    width: "50%",
-                                }}
-                                onClick={() => navigate('/register')}
-                            >
-                                Register
-                            </Button>
-                        </div>
-                    </Card>
+                        </Card>
+                    </div>
                 </div>
             </section>
         </main>

@@ -24,14 +24,20 @@ function App() {
     }
   }, [location]);
 
-  onAuthStateChanged(getAuth(), (user) => {
-    if (user) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }); 
-  
+
+  useEffect(() => {
+    onAuthStateChanged(getAuth(), (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setLoading(false);
+      } else {
+        setIsLoggedIn(false);
+        setLoading(false);
+      }
+    });
+  }, [firebase.auth.currentUser]);
+
+
   return (
     <>
       {
@@ -46,6 +52,6 @@ function App() {
       </Routes>
     </>
   );
-}
+};
 
 export default App;
