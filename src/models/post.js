@@ -3,7 +3,7 @@ import firebase from "../firebase";
 
 const postRef = collection(firebase.db, "posts");
 
-const PostController = {
+const PostModel = {
 
     getAll: async () => {
         const q = query(postRef, where("isPublic","==",true))
@@ -80,20 +80,21 @@ const PostController = {
         return rets;
     },
     
-    create: async (title,body, imgurl, schoolId, classId, isPublic) => {
+    create: async (title,body, imgurl, schoolId, classId, isPublic, isAnonymous) => {
         if (firebase.auth.currentUser.uid) {
             const docRef = await addDoc(collection(firebase.db, "posts"), {
                 userId: firebase.auth.currentUser.uid,
-                date: Date(),
+                date: Date.now(),
                 title: title,
                 body: body,
                 imgurl: imgurl,
                 schoolId: schoolId,
                 classId: classId,
-                isPublic: isPublic
+                isPublic: isPublic,
+                isAnonymous: isAnonymous,
             });
         }
     },
 }
 
-export default PostController;
+export default PostModel;

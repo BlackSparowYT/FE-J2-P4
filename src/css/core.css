@@ -467,10 +467,36 @@ footer { padding-top: 65px; }
 }
 
 
+/** Forms **/
+.vlx-form {}
+.vlx-form { --gc: 1; display: grid; grid-template-columns: repeat(var(--gc), minmax(0,1fr)); }
+.vlx-form__section { padding: 20px; }
+.vlx-form__section > *:is(h1,h2,h3,h4,p,a,span,label):first-child { margin-bottom: 10px; }
+.vlx-form__section *:is(input, textarea) { width: 100%; }
+
+@media (min-width: 768px) {
+    .vlx-form { --gc: 2; }
+    .vlx-form__section.vlx-sp-2 { grid-column: span 2; }
+    .vlx-form__section.vlx-sp-3 { grid-column: span 3; }
+    .vlx-form__section.vlx-sp-4 { grid-column: span 4; }
+}
+
 /** Inputs **/
-*:is(input, .input) { background-color: var(--primary); outline: 0; border: 1px solid var(--border-clr); border-radius: var(--border-radius-0-5x); }
-*:is(input, .input):hover { border: 1px solid var(--accent); }
-*:is(input, .input):focus { border: 1px solid var(--accent); }
+*:is(input, .input, textarea, .textarea, .vlx-file-input) { display: block; padding: 5px 10px; background-color: var(--primary); outline: 0; border: 1px solid var(--border-clr); border-radius: var(--border-radius-0-5x); width: 100%; }
+*:is(input, .input, textarea, .textarea, .vlx-file-input):hover { border: 1px solid var(--accent); }
+*:is(input, .input, textarea, .textarea, .vlx-file-input):focus { border: 1px solid var(--accent); }
+*:is(input[type="file"]) { display: none; }
+
+*:is(.vlx-file-input) { --fs: 26px; }
+
+.vlx-switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+.vlx-switch input { opacity: 0; width: 0; height: 0; }
+.vlx-slider { border-radius: 34px; position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s; }
+.vlx-slider:before { border-radius: 50%; position: absolute; content: ""; height: 26px; width: 26px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s; }
+input:checked + .vlx-slider { background-color: var(--accent); }
+input:focus + .vlx-slider { box-shadow: 0 0 1px var(--accent); }
+input:checked + .vlx-slider:before { -webkit-transform: translateX(26px); -ms-transform: translateX(26px); transform: translateX(26px); }
+
 
 
 /** Display **/
