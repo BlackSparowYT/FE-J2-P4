@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faFolderOpen, faHouse, faRightFromBracket, faRightToBracket, faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
+import user from "../controller/User";
 
-function Sidebar() {
-  localStorage.setItem("login", false);
+function Sidebar(props) {
+  const [userName, setUserName] = useState("");
 
-  const isLoggedIn = localStorage.getItem("login") === "true";
+  useEffect(() => {
+    const fetchUserName = async () => {
+      const name = await user.getUserName();
+      setUserName(name);
+    };
+
+    fetchUserName();
+  }, [props.isloggedin]);
+
+  const LinkTo = (to, icon, title) => {
+    return (
+      <Link className="item" to={to}>
+        <FontAwesomeIcon icon={icon} /><p>{title}</p>
+      </Link>
+    );
+  };
 
   return (
     <header>
-      <a>{isLoggedIn}</a>
-
+      {props.isloggedin}
       <div className="sidebar">
         <div className="sidebar__logo">
           <h2>Vak Roddels</h2>
@@ -36,23 +53,14 @@ function Sidebar() {
             }
         </div>
         <div className="sidebar__items sidebar__items--bottom">
-            {isLoggedIn ? (
-                <>
-                <Link className="item" to={"/account/settings"}>
-                    <i className="vlx-icon vlx-icon--gear"></i>
-                    <p>Settings</p>
-                </Link>
-                <Link className="item" to={"/account/logout"}>
-                    <i className="vlx-icon vlx-icon--right-from-bracket"></i>
-                    <p>Logout</p>
-                </Link>
-                </>
-            ) : (
-                <Link className="item" to={"/login"}>
-                    <i className="vlx-icon vlx-icon--right-to-bracket"></i>
-                    <p>Login</p>
-                </Link>
-            )}
+          {props.isloggedin ?
+            <>
+              {LinkTo('/auth/settings', faGear, 'Settings')}
+              {LinkTo('/account', faRightFromBracket, userName || 'Loading...')}
+            </>
+            :
+            LinkTo('/auth/login', faRightToBracket, 'Login')
+          }
         </div>
       </div>
     </header>

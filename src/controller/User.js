@@ -1,16 +1,27 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
+} from "firebase/auth";
 import firebase from "../firebase";
-import { Firestore, addDoc, deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import {
+    Firestore,
+    addDoc,
+    deleteDoc,
+    doc,
+    getDoc,
+    setDoc,
+    updateDoc
+} from "firebase/firestore";
 
 class UserClass {
     login = async (mail, password) => {
         await signInWithEmailAndPassword(firebase.auth, mail, password)
-        .then((userCredential) => {
-            return true;
-        })
-        .catch((error) => {
-            return false;
-        });
+            .then((userCredential) => {
+                return true;
+            })
+            .catch((error) => {
+                return false;
+            });
     }
 
     logout = async () => {
@@ -65,7 +76,39 @@ class UserClass {
         return false;
     }
 
-    isAdmin = async() => {
+    getUserName = async () => {
+        if (this.isLoggedIn()) {
+            try {
+                const userRef = doc(firebase.db, "users", firebase.auth.currentUser.uid);
+                const userDoc = await getDoc(userRef);
+
+                if (userDoc.exists()) {
+                    return userDoc.data().displayName;
+                } else {
+                    console.error("No such document!");
+                    return null;
+                }
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        }
+        return false;
+    };
+
+
+    getUserNameById = async (uid) => {
+        if (this.isLoggedIn()) {
+            const userDoc = await getDoc(firebase.db, "users", uid).then(() => {
+                return userDoc.data.displayName;
+            }).catch((error) => {
+
+            });
+        }
+        return false;
+    }
+
+    isAdmin = async () => {
         if (this.isLoggedIn()) {
             const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
                 return userDoc.data.userType == "admin";
@@ -77,35 +120,31 @@ class UserClass {
         return false;
     }
 
-    getName = () => {
-        return firebase.auth.currentUser.displayName;
-    }
-
     getMail = () => {
         return firebase.auth.currentUser.mail;
     }
-    
-    signUp = async(displayName, mail, password, userType) => {
+
+    signUp = async (displayName, mail, password, userType) => {
         let uid;
         await createUserWithEmailAndPassword(firebase.auth, mail, password)
-        .then((userCredentials) => {
-            uid = userCredentials.user.uid;
+            .then((userCredentials) => {
+                uid = userCredentials.user.uid;
 
-            console.log(uid);
-    
-            setDoc(doc(firebase.db, "users", uid), {
-                userType: userType,
-                displayName: displayName
-            });
-            
-        }).catch((error) => {
-            return false;
-        })
+                console.log(uid);
 
-        
+                setDoc(doc(firebase.db, "users", uid), {
+                    userType: userType,
+                    displayName: displayName
+                });
+
+            }).catch((error) => {
+                return false;
+            })
+
+
     }
 
-    deleteUser = async() => {
+    deleteUser = async () => {
         if (firebase.auth.currentUser) {
             await deleteDoc(doc(firebase.db, "users", firebase.auth.currentUser.uid));
             await firebase.auth.currentUser.delete();
