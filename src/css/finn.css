@@ -3,6 +3,7 @@
 .vlx-card .vlx-card__body {}
 .vlx-card .vlx-card__footer {}
 
+main section:not(.vlx-auth):first-child { margin-top: 20px; }
 
 .vlx-card--post { background-color: var(--background-100); border: 1px solid var(--background-100); }
 .vlx-card--post .vlx-card__header { display: flex; justify-content: start; align-items: end; gap: 10px; }
