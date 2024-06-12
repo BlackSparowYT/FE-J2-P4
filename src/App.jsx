@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Routes, Route, useLocation } from "react-router-dom";
 import firebase from "./firebase.js";
 
 // Layout
