@@ -13,8 +13,6 @@ function Home() {
         fetchData()
     }, [])
 
-    console.log(posts)
-
     const args = {
         block: {},
         posts: posts
