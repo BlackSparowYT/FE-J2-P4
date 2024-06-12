@@ -3,6 +3,7 @@
 .vlx-card .vlx-card__body {}
 .vlx-card .vlx-card__footer {}
 
+main section:first-child { margin-top: 20px; }
 
 .vlx-card--post { background-color: var(--background-100); border: 1px solid var(--background-100); }
 .vlx-card--post .vlx-card__header { display: flex; justify-content: start; align-items: end; gap: 10px; }
@@ -16,6 +17,7 @@
 .vlx-error-page { display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100%; width: 100%; }
 .vlx-error-page .vlx-code { --fs: clamp(80px, 10vw, 120px); }
 
+.vlx-search .vlx-header input { width: 100%; }
 
 .vlx-block--posts { }
 .vlx-block--posts .container { grid-column: minmax(0,1fr); }

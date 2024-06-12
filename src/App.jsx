@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Routes, Route, useLocation } from "react-router-dom";
 import firebase from "./firebase.js";
+
+// Layout
 import Sidebar from "./components/sidebar.jsx";
 // import Footer from './components/footer.jsx';
+
+// Pages
+import Error404 from './pages/404.jsx';
 import Home from "./pages/home.jsx";
-import Error404 from "./pages/404.jsx";
+import Search from './pages/search.jsx';
+
+// Posts
+import PostDetail from './pages/posts/post-detail.jsx';
+import PostAdd from './pages/posts/post-add.jsx';
+import PostEdit from './pages/posts/post-edit.jsx';
+
+// Auth
 import Login from "./pages/auth/login.jsx";
 import Register from "./pages/auth/register.jsx";
 import Logout from "./pages/auth/logout.jsx";
+
+// Account
 import Account from "./pages/auth/account.jsx";
 import Settings from "./pages/auth/settings.jsx";
 
@@ -62,9 +77,15 @@ function App() {
         <Route path="/404" Component={Error404} />
         <Route path="*" Component={Error404} />
 
+        <Route path='/zoeken' Component={Search} />
+        
+        <Route path='/post/:id' Component={PostDetail} />
+        <Route path='/post/add' Component={PostAdd} />
+        <Route path='/post/edit/:id' Component={PostAdd} />
+          
         <Route path="/account" Component={Account} />
         <Route path="/account/settings" Component={Settings} />
-
+          
         <Route path="/auth/login" Component={Login} />
         <Route path="/auth/register" Component={Register} />
         <Route path="/auth/logout" Component={Logout} />

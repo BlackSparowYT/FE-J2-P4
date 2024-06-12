@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import UserController from '../../controller/User';
 
 function CardPost(props) {
 
-    const args = props.args;
+    const [userName, setUserName] = useState("");
+
+    const id = props.args.id;
+    const args = props.args.data;
+
+    useEffect(() => {
+        const fetchUserName = async () => {
+            const name = await UserController.getUserNameById(args.userId);
+            setUserName(name);
+        };
+
+        fetchUserName();
+    }, []);
+
+    let unix_timestamp = args.date;
+    var date = new Date(unix_timestamp * 1000);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
+    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
     return (
-        <Link to={"/messages/" + args.id} className='vlx-card vlx-card--post'>
+        <Link to={"/post/" + id} className='vlx-card vlx-card--post'>
             <div className='vlx-card__header'>
-                <p className='vlx-card__user'>{args.user}</p>
-                <p className='vlx-card__time'>{args.time}</p>
+                <p className='vlx-card__user'>{userName}</p>
+                <p className='vlx-card__time'>{formattedTime}</p>
             </div>
             <div className='vlx-card__body'>
                 <div className='vlx-content'>

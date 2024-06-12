@@ -5,15 +5,12 @@ import Post from '../cards/post'
 function BlockPosts(props) {
 
     const args = props.args;
-    const block_name = "posts";
+    const block_name = "__block_name__";
 
     const block = {};
     block.id = args.block.id ?? "block-" + block_name + "-" + (Math.random() + 1).toString(36).substring(7);
     block.name = block_name;
     block.title = args.block.title;
-
-
-    const posts = args.posts;
 
 
     return (
@@ -24,11 +21,7 @@ function BlockPosts(props) {
                         {block.title}
                     </div>
                 : null}
-                <div className="inner d-grid g-20">
-
-                    {posts?.map((item) => (
-                        <Post key={item.id} args={item} />
-                    ))}
+                <div className="inner">
                 </div>
             </div>
         </section>

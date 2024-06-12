@@ -98,14 +98,20 @@ class UserClass {
 
 
     getUserNameById = async (uid) => {
-        if (this.isLoggedIn()) {
-            const userDoc = await getDoc(firebase.db, "users", uid).then(() => {
-                return userDoc.data.displayName;
-            }).catch((error) => {
+        try {
+            const userRef = doc(firebase.db, "users", uid);
+            const userDoc = await getDoc(userRef);
 
-            });
+            if (userDoc.exists()) {
+                return userDoc.data().displayName;
+            } else {
+                console.error("No such user!");
+                return "[deleted]";
+            }
         }
-        return false;
+        catch{(error) => {
+            return "[unknown]";
+        }};
     }
 
     isAdmin = async () => {
