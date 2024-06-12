@@ -48,7 +48,7 @@ function Sidebar(props) {
         <div className="sidebar__items sidebar__items--bottom">
           {props.isloggedin ?
             <>
-              {LinkTo('/auth/settings', faGear, 'Settings')}
+              {LinkTo('/account/settings', faGear, 'Settings')}
               {LinkTo('/account', faRightFromBracket, userName || 'Loading...')}
             </>
             :
