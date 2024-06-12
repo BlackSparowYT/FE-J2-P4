@@ -18,21 +18,23 @@ function PostAdd() {
     const [body, setBody] = useState('')
     const [image, setImage] = useState('')
     const [isPublic, setPublic] = useState(false);
+    const [isAnonymous, setAnonymous] = useState(false);
 
-    const handleCheckbox = () => {
+    const handlePublic = () => {
         setPublic(!isPublic);
+    };
+    const handleAnonymous = () => {
+        setAnonymous(!isAnonymous);
     };
     
     const handleSubmit = async () => {
 
-        await user.login('jordi@gmail.com', 'testtest');
+        await user.login('finn@gmail.com', 'testtest');
 
         //upload image and grab img url
-
         const imageUrl = 'https://via.placeholder.com/200';
 
-        PostModel.create(title, body, imageUrl, 'schoolId', 'classId', isPublic)
-        // TODO: change default to not public
+        PostModel.create(title, body, imageUrl, 'schoolId', 'classId', isPublic, isAnonymous)
         
     }
 
@@ -46,19 +48,32 @@ function PostAdd() {
                             <input onChange={(e) => setTitle(e.target.value)} type="text" />
                         </div>
                         <div className='vlx-form__section'>
-                            <h3 className='vlx-form__label'>Tekst</h3>
+                            <h3 className='vlx-form__label'>Afbeelding</h3>
+                            <label for="file-input" className="vlx-file-input">
+                                <p>Upload file</p>
+                            </label>
+                            <input onChange={(e) => setImage(e.target.value)} id="file-input" type="file" />
+                        </div>
+                        <div className='vlx-form__section vlx-sp-2'>
+                            <h3 className='vlx-form__label'>Tekst <small>(markdown supported)</small></h3>
                             <textarea onChange={(e) => setBody(e.target.value)} ></textarea>
                         </div>
                         <div className='vlx-form__section'>
-                            <h3 className='vlx-form__label'>Afbeelding</h3>
-                            <input onChange={(e) => setImage(e.target.value)} type="file" />
-                        </div>
-                        <div className='vlx-form__section'>
                             <h3 className='vlx-form__label'>Publiek</h3>
-                            <input value={isPublic} onChange={handleCheckbox} type="checkbox" />
+                            <label class="vlx-switch">
+                                <input value={isPublic} onChange={handlePublic} type="checkbox" />
+                                <span className="vlx-slider round"></span>
+                            </label>
                         </div>
                         <div className='vlx-form__section'>
-                            <button className='vlx-form__submit' onClick={handleSubmit}>Verzenden</button>
+                            <h3 className='vlx-form__label'>Anoniem</h3>
+                            <label class="vlx-switch">
+                                <input value={isAnonymous} onChange={handleAnonymous} type="checkbox" />
+                                <span className="vlx-slider round"></span>
+                            </label>
+                        </div>
+                        <div className='vlx-form__section'>
+                            <button className='vlx-form__submit btn btn--primary' onClick={handleSubmit}>Verzenden</button>
                         </div>
                     </div>
                 </div>
