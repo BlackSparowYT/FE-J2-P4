@@ -8,6 +8,7 @@ import Error404 from "./pages/404.jsx";
 import Login from "./pages/auth/login.jsx";
 import Register from "./pages/auth/register.jsx";
 import Logout from "./pages/auth/logout.jsx";
+import Account from "./pages/auth/account.jsx";
 import { Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -18,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const url = window.location.href;
-    if (url.includes("/account")) {
+    if (url.includes("/auth")) {
       setShowSidebar(false);
     } else {
       setShowSidebar(true);
@@ -46,9 +47,10 @@ function App() {
         <Route path="/" Component={Home} />
         <Route path="/404" Component={Error404} />
         <Route path="*" Component={Error404} />
-        <Route path="/account/login" Component={Login} />
-        <Route path="/account/register" Component={Register} />
-        <Route path="/account/logout" Component={Logout} />
+        <Route path="/account" Component={Account} />
+        <Route path="/auth/login" Component={Login} />
+        <Route path="/auth/register" Component={Register} />
+        <Route path="/auth/logout" Component={Logout} />
       </Routes>
     </>
   );
