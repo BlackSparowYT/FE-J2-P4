@@ -46,7 +46,7 @@ const Login = () => {
             >
                 Wrong password or email
             </Snackbar>
-            <section className="vlx-login">
+            <section className="vlx-login vlx-auth">
                 <div className='container'>
                     <div className="inner">
                         <Card
