@@ -6,6 +6,3 @@
 .vlx-login .container .inner a { opacity: .6; }
 .vlx-login .container .inner .btn-group { flex-direction: column; gap: 10px; }
 .vlx-login .container .inner input {font-size: 20px !important; }
-
-
-#root {margin: 0; padding: 0; text-align: center; box-sizing: border-box;}
