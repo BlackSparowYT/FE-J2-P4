@@ -103,7 +103,7 @@ const Login = () => {
                                         color: "#255c0a",
                                         borderColor: "#255c0a",
                                     }}
-                                    onClick={() => navigate('/account/register')}
+                                    onClick={() => navigate('/auth/register')}
                                 >
                                     Registreer
                                 </Button>

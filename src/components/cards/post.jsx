@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import UserController from '../../controller/User';
 
 function CardPost(props) {
 
+    const [userName, setUserName] = useState("");
+
     const id = props.args.id;
     const args = props.args.data;
+
+    useEffect(() => {
+        const fetchUserName = async () => {
+            const name = await UserController.getUserNameById(args.userId);
+            setUserName(name);
+        };
+
+        fetchUserName();
+    }, []);
 
     let unix_timestamp = args.date;
     var date = new Date(unix_timestamp * 1000);
@@ -16,7 +28,7 @@ function CardPost(props) {
     return (
         <Link to={"/post/" + id} className='vlx-card vlx-card--post'>
             <div className='vlx-card__header'>
-                <p className='vlx-card__user'>{args.userId}</p>
+                <p className='vlx-card__user'>{userName}</p>
                 <p className='vlx-card__time'>{formattedTime}</p>
             </div>
             <div className='vlx-card__body'>

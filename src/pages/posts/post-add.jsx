@@ -60,14 +60,14 @@ function PostAdd() {
                         </div>
                         <div className='vlx-form__section'>
                             <h3 className='vlx-form__label'>Publiek</h3>
-                            <label class="vlx-switch">
+                            <label className="vlx-switch">
                                 <input value={isPublic} onChange={handlePublic} type="checkbox" />
                                 <span className="vlx-slider round"></span>
                             </label>
                         </div>
                         <div className='vlx-form__section'>
                             <h3 className='vlx-form__label'>Anoniem</h3>
-                            <label class="vlx-switch">
+                            <label className="vlx-switch">
                                 <input value={isAnonymous} onChange={handleAnonymous} type="checkbox" />
                                 <span className="vlx-slider round"></span>
                             </label>

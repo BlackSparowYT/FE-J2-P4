@@ -1,41 +1,14 @@
 import { set } from 'firebase/database'
 import { React, useEffect, useState } from 'react'
 import PostCard from '../components/cards/post'
+import PostModel from '../models/post'
 
 function Search() {
 
-    const [posts, setPosts] = useState([])
-
-    useEffect(() => {
-        // TODO: Noud; fetch posts from the database
-        setPosts([
-            {
-                id: 1,
-                user: 'username1',
-                time: '20 mei 10:32',
-                title: 'Message title 1',
-                body: 'Eos modi dolores 33 odit perspiciatis et doloremque temporibus. Est labore temporibus ut ipsam quia quo officiis perferendis ut eaque unde et dicta nihil eos molestias voluptate.',
-                image: 'https://via.placeholder.com/200',
-            },
-            {
-                id: 2,
-                user: 'username2',
-                time: '20 mei 10:32',
-                title: 'Message title 2',
-                body: 'Eos modi dolores 22 odit perspiciatis et doloremque temporibus. Est labore temporibus ut ipsam quia quo officiis perferendis ut eaque unde et dicta nihil eos molestias voluptate.',
-            },
-            {
-                id: 3,
-                user: 'username3',
-                time: '20 mei 10:32',
-                title: 'Message title 3',
-                body: 'title 1 Eos modi dolores 11 odit perspiciatis et doloremque temporibus. Est labore temporibus ut ipsam quia quo officiis perferendis ut eaque unde et dicta nihil eos molestias voluptate.',
-                image: 'https://via.placeholder.com/200',
-            }
-        ])
-    }, [])
 
     const [schools, setSchool] = useState([])
+    const [posts, setPosts] = useState([])
+    const [search, setSearch] = useState();
 
     useEffect(() => {
         // TODO: Noud; fetch posts from the database
@@ -55,23 +28,25 @@ function Search() {
         ])
     }, [])
 
-    const [search, setSearch] = useState();
-    /* const fetchData = async () => {
-        await axios.get("https://api.coincap.io/v2/assets")
-        .then(response => {
-            setResponse(response.data.data); 
-        })
-        .catch(error => {console.error(error)});
-    };
+    useEffect(() => {
+        async function fetchData() {
+            setPosts( await PostModel.getAll())
+        }
+        fetchData()
+    }, [])
 
-    useEffect(() => { fetchData(); }, []) */
+    const args = {
+        block: {},
+        posts: posts
+    }
+
 
     const filterItems = () => {
         if (!search) {
             return posts;
         } else {
             return posts.filter(post => {
-                return post.title.toLowerCase().includes(search) || post.body.toLowerCase().includes(search) || post.user.toLowerCase().includes(search);
+                return post.data.title.toLowerCase().includes(search) || post.data.body.toLowerCase().includes(search);
             });
         }
     }
