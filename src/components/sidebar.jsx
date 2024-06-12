@@ -44,7 +44,7 @@ function Sidebar(props) {
                 <i className="vlx-icon vlx-icon--bell"></i>
                 <p>Meldingen</p>
             </Link>
-            {!props.isLoggedIn ? (
+            {props.isLoggedIn ? (
                 <Link className="item" to={"/post/add"}>
                     <i className="vlx-icon vlx-icon--plus"></i>
                     <p>Roddel!</p>

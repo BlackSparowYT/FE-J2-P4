@@ -105,7 +105,6 @@ class UserClass {
             if (userDoc.exists()) {
                 return userDoc.data().displayName;
             } else {
-                console.error("No such user!");
                 return "[deleted]";
             }
         }
