@@ -1,6 +1,7 @@
 import {
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut
 } from "firebase/auth";
 import firebase from "../firebase";
 import {

@@ -1,5 +1,7 @@
-import { collection, addDoc, query, getDocs, where, doc, getDoc } from "firebase/firestore"; 
+import { collection, addDoc, query, getDocs, where, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore"; 
 import firebase from "../firebase";
+
+import user from "../controller/User";
 
 const postRef = collection(firebase.db, "posts");
 
@@ -28,6 +30,21 @@ const PostModel = {
             return docSnap.data();
         } else {
             return false;
+        }
+    },
+
+    addComment: async (id, body) => {
+        if (firebase.auth.currentUser) {
+            console.log("Test")
+            const docRef = doc(firebase.db, "posts", id);
+            await updateDoc(docRef, {
+                comments: arrayUnion({
+                    body: body,
+                    uid: firebase.auth.currentUser.uid,
+                })
+            })        
+        } else {
+            console.error("User should be logged in to post comments")
         }
     },
 
