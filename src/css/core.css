@@ -458,7 +458,7 @@ footer { padding-top: 65px; }
 
 
 /** BTN Group **/
-.btn-group { display: flex; justify-content: center; align-items: center; gap: 30px 60px; margin-top: 30px; flex-wrap: wrap; }
+.btn-group { display: flex; justify-content: center; align-items: center; gap: 30px 60px; margin-top: 10px; flex-wrap: wrap; }
 .btn-group--left { justify-content: left; }
 .btn-group--right { justify-content: right; }
 

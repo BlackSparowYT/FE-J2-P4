@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import firebase from '../../firebase.js'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom';
 import Card from "@mui/joy/Card";
 import Button from "@mui/joy/Button";
@@ -9,7 +9,7 @@ import IconButton from "@mui/joy/IconButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from '@mui/joy/Snackbar';
-import { set } from 'firebase/database';
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -19,10 +19,18 @@ const Login = () => {
     const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    
+    const GoogleSignIn = async (e) => {
+        const provider = await new GoogleAuthProvider();
+        Promise.resolve(signInWithPopup(firebase.auth, provider)).then((value) => {
+            navigate('/');
+        })
+    };
 
     const showPassword = () => {
         setShowPasswordBool(!showPasswordBool);
     };
+
 
     const signIn = async () => {
         setLoading(true);
@@ -86,10 +94,10 @@ const Login = () => {
                                     sx={{
                                         width: "50%",
                                         backgroundColor: "#255c0a",
-                                        ":hover" : {
+                                        ":hover": {
                                             backgroundColor: "#255c0a",
                                         },
-                                        }}
+                                    }}
                                     onClick={signIn}
                                     loading={isLoading}
                                 >
@@ -107,6 +115,9 @@ const Login = () => {
                                 >
                                     Registreer
                                 </Button>
+                                <button onClick={GoogleSignIn}>
+                                    Login in met Google
+                                </button>
                                 <Link to={"/"}>home</Link>
                             </div>
                         </Card>
