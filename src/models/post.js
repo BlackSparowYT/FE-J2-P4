@@ -1,4 +1,4 @@
-import { collection, addDoc, query, getDocs, where, doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore"; 
+import { collection, addDoc, query, getDocs, where, doc, getDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore"; 
 import firebase from "../firebase";
 
 import user from "../controller/User";
@@ -35,7 +35,6 @@ const PostModel = {
 
     addComment: async (id, body) => {
         if (firebase.auth.currentUser) {
-            console.log("Test")
             const docRef = doc(firebase.db, "posts", id);
             await updateDoc(docRef, {
                 comments: arrayUnion({
@@ -45,6 +44,15 @@ const PostModel = {
             })        
         } else {
             console.error("User should be logged in to post comments")
+        }
+    },
+
+    removeComment: async (id, comment) => {
+        if (firebase.auth.currentUser) {
+            const docRef = doc(firebase.db, "posts", id);
+            await updateDoc(docRef, {
+                comments: arrayRemove(comment)
+            })
         }
     },
 
