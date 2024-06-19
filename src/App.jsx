@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Routes, Route, useLocation } from "react-router-dom";
 import firebase from "./firebase.js";
 
 // Layout
@@ -24,21 +24,13 @@ import Logout from "./pages/auth/logout.jsx";
 
 // Account
 import Account from "./pages/auth/account.jsx";
+import Settings from "./pages/auth/settings.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const location = useLocation();
-
-  useEffect(() => {
-    const url = window.location.href;
-    if (url.includes("/auth")) {
-      setShowSidebar(false);
-    } else {
-      setShowSidebar(true);
-    }
-  }, [location]);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(getAuth(), (user) => {
@@ -48,7 +40,30 @@ function App() {
         setIsLoggedIn(false);
       }
     });
-  }, [firebase.auth.currentUser]);
+
+    const url = window.location.pathname;
+
+    let regex = /^\/auth\/(login|register|logout)$/;
+
+    if (regex.test(url)) {
+      setShowSidebar(false);
+    } else {
+      setShowSidebar(true);
+    }
+
+
+    if (
+      url.includes("/account") ||
+      url.includes("/post/add/") ||
+      url.includes("/post/edit/")
+    ) {
+      if (!isLoggedIn) {
+        navigate("/");
+      }
+    }
+  }, [firebase.auth.currentUser, location]);
+
+
 
 
   return (
@@ -60,7 +75,7 @@ function App() {
         <Route path="/" Component={Home} />
         <Route path="/404" Component={Error404} />
         <Route path="*" Component={Error404} />
-          
+
         <Route path='/zoeken' Component={Search} />
         
         <Route path='/post/:id' Component={PostDetail} />
@@ -68,10 +83,12 @@ function App() {
         <Route path='/post/edit/:id' Component={PostAdd} />
           
         <Route path="/account" Component={Account} />
-        
+        <Route path="/account/settings" Component={Settings} />
+          
         <Route path="/auth/login" Component={Login} />
         <Route path="/auth/register" Component={Register} />
         <Route path="/auth/logout" Component={Logout} />
+
       </Routes>
     </>
   );

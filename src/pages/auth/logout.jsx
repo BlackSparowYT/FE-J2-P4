@@ -5,7 +5,6 @@ import firebase from '../../firebase.js';
 
 const Logout = () => {
   const navigate = useNavigate();
-  console.error('test')
 
   try {
     signOut(firebase.auth);

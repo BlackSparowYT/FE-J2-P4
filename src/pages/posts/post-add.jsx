@@ -7,12 +7,12 @@ function PostAdd() {
 
     const navigate = useNavigate();
 
-    /* user.isLoggedIn().then((res) => {
+    user.isLoggedIn().then((res) => {
         if (!res) {
-            navigate('/login');
+            navigate('/');
             exit();
         }
-    }) */
+    })
     
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
@@ -28,8 +28,6 @@ function PostAdd() {
     };
     
     const handleSubmit = async () => {
-
-        await user.login('finn@gmail.com', 'testtest');
 
         //upload image and grab img url
         const imageUrl = 'https://via.placeholder.com/200';

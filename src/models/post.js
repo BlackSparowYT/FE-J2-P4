@@ -1,4 +1,4 @@
-import { collection, addDoc, query, getDocs, where } from "firebase/firestore"; 
+import { collection, addDoc, query, getDocs, where, doc, getDoc } from "firebase/firestore"; 
 import firebase from "../firebase";
 
 const postRef = collection(firebase.db, "posts");
@@ -18,6 +18,17 @@ const PostModel = {
         });
 
         return rets;
+    },
+
+    getById: async (id) => {
+        const docRef = doc(firebase.db, "posts", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            return false;
+        }
     },
 
     getAllByLoggedInUser: async () => {
