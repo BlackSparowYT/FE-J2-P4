@@ -9,8 +9,10 @@ import {
     deleteDoc,
     doc,
     getDoc,
+    getDocs,
     setDoc,
-    updateDoc
+    updateDoc,
+    collection,
 } from "firebase/firestore";
 
 class UserClass {
@@ -89,12 +91,35 @@ class UserClass {
                     return null;
                 }
             } catch (error) {
-                console.error(error);
+                //console.error(error);
                 return null;
             }
         }
         return false;
     };
+
+
+    getUsersBySearch = async (search) => {
+        const querySnapshot = await getDocs(collection(firebase.db, "users"));
+
+        let validSearches = [];
+        querySnapshot.forEach((doc) => {
+            if (doc.data().displayName.toLowerCase().includes(search.toLowerCase())) {
+                let user = doc.data();
+                validSearches.push({
+                    uid: doc.id,
+                    type: "user",
+                    data: user
+                });
+
+            }
+        });
+
+        if (validSearches.length == 0) {
+            return null;
+        }
+        return validSearches;
+    }
 
 
     getUserNameById = async (uid) => {
@@ -105,6 +130,7 @@ class UserClass {
             if (userDoc.exists()) {
                 return userDoc.data().displayName;
             } else {
+                //console.error("No such user!");
                 return "[deleted]";
             }
         }
