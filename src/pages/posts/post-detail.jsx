@@ -11,12 +11,13 @@ import {
 } from "@mui/joy";
 import { useParams } from "react-router-dom";
 import PostModel from "../../models/post";
-import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
 
 import firebase from "../../firebase";
 import user from "../../controller/User";
 import Comment from "../../components/blocks/comment";
 import { ThumbUp } from "@mui/icons-material";
+import LikeButton from "../../components/likeButton";
 
 function PostDetail() {
   const { id } = useParams();
@@ -27,30 +28,49 @@ function PostDetail() {
   const [comments, setComments] = useState([]);
   const [commentsUser, setcommentsUser] = useState([]);
   const [canComment, setCanComment] = useState(false);
+  const [posterName, setPosterName] = useState("");
 
   const submitComment = async () => {
     PostModel.addComment(id, commentBody);
     setCommentBody("");
   };
 
+
   useEffect(() => {
+
     const func = async () => {
-      onSnapshot(doc(firebase.db, "posts", id), (doc) => {
+      onSnapshot(doc(firebase.db, "posts", id), (doc) => { 
         setPostData(doc.data());
 
-        if (postData.comments) {
+        if (doc.data().comments) {
           const arr = doc.data().comments.map((element, index) => {
             return <Comment key={index} owner={id} index={index}  data={element} />;
           });
           setComments(arr);
         }
-        setPostRead(true);
+        setPostRead(true); 
       });
       const isLoggedIn = await user.isLoggedIn();
-      setCanComment(isLoggedIn);
+      setCanComment(isLoggedIn); 
     };
+
+
+
     func();
-  });
+  }, [comments]);
+
+  useEffect(() => {
+    const func = async () => {
+        const docRef = doc(firebase.db, "users", postData.userId);
+        const snap = await getDoc(docRef);
+        try {
+          setPosterName(snap.data().displayName);
+        } catch (error) {
+          
+        }
+      }
+    func();
+  },[postData])
 
   return (
     <main>
@@ -75,7 +95,7 @@ function PostDetail() {
                 justifyContent="space-between"
               >
                 <Typography level="h2">{postData.title}</Typography>
-                <Typography>{postData.title}</Typography>
+                <Typography>{posterName}</Typography>
               </Stack>
               <Typography>{postData.body}</Typography>
             </Card>
@@ -89,9 +109,9 @@ function PostDetail() {
               }}
               >
               <ButtonGroup size="lg">
-                <IconButton>
-                  <ThumbUp/>
-                </IconButton>
+                { postData &&
+                  <LikeButton id={id} data={postData}/>
+                }
               </ButtonGroup>
               <Input
                 disabled={!canComment}

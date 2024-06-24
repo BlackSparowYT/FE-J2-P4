@@ -56,6 +56,24 @@ const PostModel = {
         }
     },
 
+    addLike: async (id) => {
+        if (firebase.auth.currentUser) {
+            const docRef = doc(firebase.db, "posts", id);
+            await updateDoc(docRef, {
+                likes: arrayUnion(firebase.auth.currentUser.uid)
+            })
+        }
+    }, 
+
+    removeLike: async (id) => {
+        if (firebase.auth.currentUser) {
+            const docRef = doc(firebase.db, "posts", id);
+            await updateDoc(docRef, {
+                likes: arrayRemove(firebase.auth.currentUser.uid)
+            })
+        }
+    },
+
     getAllByLoggedInUser: async () => {
         const q = query(postRef, where("userId","==",firebase.auth.currentUser.uid))
         const docs = await getDocs(q);
