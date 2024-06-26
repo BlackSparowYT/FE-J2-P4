@@ -48,6 +48,7 @@ const settings = () => {
                                 },
                             }}
                             loading={isLoading}
+                            onClick={() => userController.setSchoolID(schoolID)}
                         >
                             Change user name
                         </Button>

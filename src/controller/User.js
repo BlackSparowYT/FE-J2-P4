@@ -184,6 +184,10 @@ class UserClass {
         }
     }
 
+    setSchoolID = async (schoolID) => {
+       
+    }
+
   
 }
 
