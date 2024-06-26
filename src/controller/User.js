@@ -1,5 +1,6 @@
 import {
     createUserWithEmailAndPassword,
+    getAuth,
     signInWithEmailAndPassword,
     signOut
 } from "firebase/auth";
@@ -51,7 +52,7 @@ class UserClass {
     }
 
     isLoggedIn = async () => {
-        if (firebase.auth.currentUser) {
+        if (await getAuth().currentUser) {
             return true;
         } else {
             return false;
@@ -159,10 +160,13 @@ class UserClass {
 
     isAdmin = async () => {
         if (this.isLoggedIn()) {
-            const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
+            const uid = getAuth().currentUser.uid;
+            console.log("id", uid);
+            const userDoc = await getDoc(firebase.db, "users", uid).then(() => {
+                console.log("userDoc",userDoc.data);
                 return userDoc.data.userType == "admin";
             }).catch((error) => {
-
+                console.error(error);
             });
         }
 
