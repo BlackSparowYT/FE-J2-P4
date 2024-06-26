@@ -78,6 +78,7 @@ class UserClass {
         return false;
     }
 
+
     getUserName = async () => {
         if (this.isLoggedIn()) {
             try {
@@ -133,10 +134,11 @@ class UserClass {
                 //console.error("No such user!");
                 return "[deleted]";
             }
-        }
-        catch{(error) => {
-            return "[unknown]";
-        }};
+        } catch {
+            (error) => {
+                return "[unknown]";
+            }
+        };
     }
 
     isAdmin = async () => {
@@ -157,23 +159,31 @@ class UserClass {
 
     signUp = async (displayName, mail, password, userType) => {
         let uid;
-        await createUserWithEmailAndPassword(firebase.auth, mail, password)
-            .then((userCredentials) => {
-                uid = userCredentials.user.uid;
+        try {
+            const userCredentials = await createUserWithEmailAndPassword(firebase.auth, mail, password);
+            uid = userCredentials.user.uid;
+            console.log(uid);
 
-                console.log(uid);
+            await setDoc(doc(firebase.db, "users", uid), {
+                userType: userType,
+                displayName: displayName
+            });
 
-                setDoc(doc(firebase.db, "users", uid), {
-                    userType: userType,
-                    displayName: displayName
-                });
-
-            }).catch((error) => {
-                return false;
-            })
-
-
+            return true; 
+        } catch (error) {
+            if (error.code === 'auth/email-already-in-use') {
+                return 'Email is al in gebruik';
+            } else if ( error.code === "auth/invalid-email") {
+                return 'Email is niet geldig';
+            } else if ( error.code === "auth/weak-password") {
+                return 'Wachtwoord is te zwak (minimaal 6 karakters)';
+            } else {
+                console.log(error.code);
+                return null;
+            } 
+        }
     }
+
 
     deleteUser = async () => {
         if (firebase.auth.currentUser) {
