@@ -24,8 +24,6 @@ const Comment = (props) => {
         setIsAdmin(docSnap.data().userType == "admin");
       }
 
-
-
       setIsAdmin(docSnap.data().userType == "admin");
     };
     func();
