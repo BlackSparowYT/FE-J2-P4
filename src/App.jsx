@@ -20,78 +20,84 @@ import PostEdit from './pages/posts/post-edit.jsx';
 // Auth
 import Login from "./pages/auth/login.jsx";
 import Register from "./pages/auth/register.jsx";
+import RegisterSchool from "./pages/auth/register-school.jsx";
 import Logout from "./pages/auth/logout.jsx";
 
 // Account
 import Account from "./pages/account/main.jsx";
 import Settings from "./pages/account/settings.jsx";
+import user from "./controller/User.js";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(true);
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    onAuthStateChanged(getAuth(), (user) => {
-      if (user) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    });
-
-    const url = window.location.pathname;
-
-    let regex = /^\/auth\/(login|register|logout)$/;
-
-    if (regex.test(url)) {
-      setShowSidebar(false);
-    } else {
-      setShowSidebar(true);
-    }
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showSidebar, setShowSidebar] = useState(true);
+    const location = useLocation();
+    const navigate = useNavigate();
 
 
-    if (
-      url.includes("/account") ||
-      url.includes("/post/add/") ||
-      url.includes("/post/edit/")
-    ) {
-      if (!isLoggedIn) {
-        navigate("/");
-      }
-    }
-  }, [firebase.auth.currentUser, location]);
+    useEffect(() => {
+        onAuthStateChanged(getAuth(), (user) => {
+            if (user) {
+                setIsLoggedIn(true);
+            } else {
+                setIsLoggedIn(false);
+            }
+        });
+
+        const url = window.location.pathname;
+
+        let regex = /^\/auth\/(login|register|logout|register\/school)$/;
+
+        if (regex.test(url)) {
+            setShowSidebar(false);
+        } else {
+            setShowSidebar(true);
+        }
+
+
+        console.log(isLoggedIn);
+        if (
+            url.includes("/account") ||
+            url.includes("/post/add/") ||
+            url.includes("/post/edit/") ||
+            url.includes("/register/school")
+        ) {
+            if (!isLoggedIn) {
+                navigate("/");
+            }
+        }
+    }, [firebase.auth.currentUser, location]);
 
 
 
 
-  return (
-    <>
-      {
-        showSidebar ? <Sidebar isloggedin={isLoggedIn} /> : null
-      }
-      <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/404" Component={Error404} />
-        <Route path="*" Component={Error404} />
+    return (
+        <>
+            {
+                showSidebar ? <Sidebar isloggedin={isLoggedIn} /> : null
+            }
+            <Routes>
+                <Route path="/" Component={Home} />
+                <Route path="/404" Component={Error404} />
+                <Route path="*" Component={Error404} />
 
-        <Route path='/zoeken' Component={Search} />
-        
-        <Route path='/post/:id' Component={PostDetail} />
-        <Route path='/post/add' Component={PostAdd} />
-        <Route path='/post/edit/:id' Component={PostAdd} />
-          
-        <Route path="/account" Component={Account} />
-        <Route path="/account/settings" Component={Settings} />
-          
-        <Route path="/auth/login" Component={Login} />
-        <Route path="/auth/register" Component={Register} />
-        <Route path="/auth/logout" Component={Logout} />
+                <Route path='/zoeken' Component={Search} />
 
-      </Routes>
-    </>
-  );
+                <Route path='/post/:id' Component={PostDetail} />
+                <Route path='/post/add' Component={PostAdd} />
+                <Route path='/post/edit/:id' Component={PostAdd} />
+
+                <Route path="/account" Component={Account} />
+                <Route path="/account/settings" Component={Settings} />
+
+                <Route path="/auth/login" Component={Login} />
+                <Route path="/auth/register" Component={Register} />
+                <Route path="/auth/register/school" Component={RegisterSchool} />
+                <Route path="/auth/logout" Component={Logout} />
+
+            </Routes>
+        </>
+    );
 };
 
 export default App;

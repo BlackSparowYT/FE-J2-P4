@@ -42,18 +42,6 @@ class UserClass {
         }
     }
 
-    isSchool = async () => {
-        if (this.isLoggedIn()) {
-            const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {
-                return userDoc.data.userType == "school";
-            }).catch((error) => {
-
-            });
-        }
-
-        return false;
-    }
-
     isTeacher = async () => {
         if (this.isLoggedIn()) {
             const userDoc = await getDoc(firebase.db, "users", firebase.auth.currentUser.uid).then(() => {

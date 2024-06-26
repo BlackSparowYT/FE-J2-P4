@@ -118,6 +118,7 @@ const Login = () => {
                                 <button onClick={GoogleSignIn}>
                                     Login in met Google
                                 </button>
+                                <Link to={"/auth/register/school"}>Registreer als school</Link>
                                 <Link to={"/"}>home</Link>
                             </div>
                         </Card>

@@ -10,12 +10,14 @@ import IconButton from "@mui/joy/IconButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from '@mui/joy/Snackbar';
+import SchoolsModel from '../../models/schools.js';
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [verifypassword, setVerifyPassword] = useState('');
+    const [schoolID, setSchoolID] = useState('');
     const [showPasswordBool, setShowPasswordBool] = useState(false);
     const [showVerifyPasswordBool, setShowVerifyPasswordBool] = useState(false);
     const [isLoading, setLoading] = useState(false);
@@ -35,6 +37,9 @@ const Register = () => {
         if(!passwordCheck()) {
             return;
         }
+        if (await schoolCheck() != true) {
+            return;
+        }
         const user = await User.signUp(userName, email, password, "student");
         if (user == true) {
             navigate("/");
@@ -42,6 +47,15 @@ const Register = () => {
             setErrorMessage(user);
         }
         setLoading(false);
+    }
+
+    const schoolCheck = async () => {
+        if (await SchoolsModel.exists(schoolID) != true) {
+            setErrorMessage("School met dit ID bestaat niet");
+            setLoading(false);
+            return false;
+        }
+        return true;
     }
 
     const passwordCheck = () => {
@@ -107,6 +121,20 @@ const Register = () => {
                                             <FontAwesomeIcon icon={faEye} />
                                         )}
                                     </IconButton>
+                                }
+                            />
+                            <h3>School ID</h3>
+                            <Input
+                                type={showVerifyPasswordBool ? "text" : "password"}
+                                onChange={(e) => setSchoolID(e.target.value)}
+                                endDecorator={
+                                <IconButton onClick={showVerifyPassword}>
+                                    {showVerifyPasswordBool ? (
+                                    <FontAwesomeIcon icon={faEyeSlash} />
+                                    ) : (
+                                    <FontAwesomeIcon icon={faEye} />
+                                    )}
+                                </IconButton>
                                 }
                             />
                             {errorMessage && (
