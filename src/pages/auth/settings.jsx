@@ -10,6 +10,13 @@ const settings = () => {
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {
+
+        const getShoolData = async () => {
+            // const docRef = doc(firebase.db, "users");
+        };
+
+        getShoolData();
+
         setLoading(true);
         return firebase.auth.onAuthStateChanged(user => {
             if (user.providerData[0].providerId === "google.com") {
@@ -50,7 +57,7 @@ const settings = () => {
                             loading={isLoading}
                             onClick={() => userController.setSchoolID(schoolID)}
                         >
-                            Change user name
+                            Set School id
                         </Button>
                         </div>
                     </div>
