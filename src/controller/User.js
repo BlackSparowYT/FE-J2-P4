@@ -185,7 +185,10 @@ class UserClass {
     }
 
     setSchoolID = async (schoolID) => {
-       
+       if (firebase.auth.currentUser) {
+        const docRef = doc(firebase.db, "users", firebase.auth.currentUser.uid);
+        await updateDoc(docRef, {schoolID: schoolID});
+       }
     }
 
   
