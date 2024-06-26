@@ -28,7 +28,7 @@ function CardPost(props) {
     return (
         <Link to={"/post/" + id} className='vlx-card vlx-card--post'>
             <div className='vlx-card__header'>
-                <p className='vlx-card__user'>{userName}</p>
+                <a href={'/profiles/' + args.userId} className='vlx-card__user'>{userName}</a>
                 <p className='vlx-card__time'>{formattedTime}</p>
             </div>
             <div className='vlx-card__body'>

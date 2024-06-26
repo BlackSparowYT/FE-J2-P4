@@ -23,8 +23,8 @@ import Register from "./pages/auth/register.jsx";
 import Logout from "./pages/auth/logout.jsx";
 
 // Account
-import Account from "./pages/auth/account.jsx";
-import Settings from "./pages/auth/settings.jsx";
+import Account from "./pages/account/main.jsx";
+import Settings from "./pages/account/settings.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

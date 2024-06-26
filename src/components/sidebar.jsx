@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faFolderOpen, faHouse, faRightFromBracket, faRightToBracket, faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faFolderOpen, faHouse, faRightFromBracket, faRightToBracket, faGear, faCircleUser, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import user from "../controller/User";
 
 function Sidebar(props) {
@@ -56,7 +56,7 @@ function Sidebar(props) {
                     {props.isloggedin ?
                         <>
                             {LinkTo('/account/settings', faGear, 'Settings')}
-                            {LinkTo('/account', faRightFromBracket, userName || 'Loading...')}
+                            {LinkTo('/account', faCircleUser, userName || 'Loading...')}
                         </>
                         :
                         LinkTo('/auth/login', faRightToBracket, 'Login')

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import PostModel from '../../models/post'
+import PostsBlock from '../../components/blocks/posts'
 import user from '../../controller/User'
 import Button from "@mui/joy/Button";
 
@@ -16,27 +18,35 @@ const Account = () => {
 
         fetchUserName();
     }, []);
+
+
+    
+
+    const [posts, setPosts] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            setPosts( await PostModel.getAllByLoggedInUser())
+        }
+        fetchData()
+    }, [])
+
+    const args = {
+        block: {
+            title: "<h3>Mijn posts</h3>"
+        },
+        posts: posts
+    }
+
     return (
         <>
             <main>
-
                 <section className="vlx-account">
-                    <div className='container'>
-                        <h1>Account</h1>
-                        <p>Welkom terug, <strong>{userName}</strong>!</p>
-                        <Button
-                            variant="outlined"
-
-                            sx={{
-                                width: "50%",
-                                borderColor: "#255c0a",
-                            }}
-                            onClick={() => navigate('/auth/logout')}
-                        >
-                            Logout
-                        </Button>
+                    <div className="container">
+                        <h1>Mijn account</h1>
                     </div>
                 </section>
+                <PostsBlock args={args}/>
             </main>
         </>
     )
