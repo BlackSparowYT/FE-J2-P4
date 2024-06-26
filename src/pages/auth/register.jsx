@@ -117,22 +117,22 @@ const Register = () => {
                                 </div>
                             )}
                             <div className="btn-group">
-                                <Button
-                                    variant="solid"
+                                    <Button
+                                        variant="solid"
 
-                                    sx={{
-                                        width: "50%",
-                                        background: "#255c0a",
-                                        borderColor: "#255c0a",
-                                        ":hover": {
-                                            backgroundColor: "#255c0a",
-                                        },
-                                    }}
-                                    loading={isLoading}
-                                    onClick={signUp}
-                                >
-                                    Registreer
-                                </Button>
+                                        sx={{
+                                            width: "50%",
+                                            background: "#255c0a",
+                                            borderColor: "#255c0a",
+                                            ":hover": {
+                                                backgroundColor: "#255c0a",
+                                            },
+                                        }}
+                                        loading={isLoading}
+                                        onClick={signUp}
+                                    >
+                                        Registreer
+                                    </Button>
                                 <Link to={"/"}>home</Link>
                             </div>
                         </Card>

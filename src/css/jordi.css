@@ -7,8 +7,7 @@
 .vlx-login .container .inner .btn-group { flex-direction: column; gap: 10px; }
 .vlx-login .container .inner input {font-size: 20px !important; }
 
-.vlx-errors p {
-    color: red;
-    font-size: 20px;
-    font-weight: bold;
-}
+.vlx-errors p { color: red; font-size: 20px; font-weight: bold; }
+
+
+.vlx-account .container .inner h3 { text-align: left; margin-top: 10px; margin-top: 20px; }

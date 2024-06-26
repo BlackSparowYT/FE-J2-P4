@@ -4,19 +4,25 @@ import PostModel from '../../models/post'
 import PostsBlock from '../../components/blocks/posts'
 import user from '../../controller/User'
 import Button from "@mui/joy/Button";
-
+import firebase from "../../firebase";
+import userController from "../../controller/User";
 
 const Account = () => {
     const [userName, setUserName] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchUserName = async () => {
-            const name = await user.getUserName();
-            setUserName(name);
-        };
-
-        fetchUserName();
+        return firebase.auth.onAuthStateChanged(user => {
+            if (user.providerData[0].providerId === "google.com") {
+                setUserName(user.displayName);
+            } else {
+                const fetchUserName = async () => {
+                    const name = await userController.getUserName();
+                    setUserName(name);
+                };
+                fetchUserName();
+            }
+        });
     }, []);
 
 
