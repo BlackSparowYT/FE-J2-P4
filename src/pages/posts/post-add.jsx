@@ -32,8 +32,10 @@ function PostAdd() {
         //upload image and grab img url
         const imageUrl = 'https://via.placeholder.com/200';
 
-        PostModel.create(title, body, imageUrl, 'schoolId', 'classId', isPublic, isAnonymous)
+        await PostModel.create(title, body, imageUrl, 'schoolId', 'classId', isPublic, isAnonymous)
         
+        navigate("/");
+
     }
 
     return (

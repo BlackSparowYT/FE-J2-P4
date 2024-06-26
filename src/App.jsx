@@ -80,7 +80,7 @@ function App() {
         
         <Route path='/post/:id' Component={PostDetail} />
         <Route path='/post/add' Component={PostAdd} />
-        <Route path='/post/edit/:id' Component={PostAdd} />
+        <Route path='/post/edit/:id' Component={PostEdit} />
           
         <Route path="/account" Component={Account} />
         <Route path="/account/settings" Component={Settings} />

@@ -9,14 +9,14 @@ import {
   Stack,
   Typography,
 } from "@mui/joy";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PostModel from "../../models/post";
-import { collection, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
 
 import firebase from "../../firebase";
 import user from "../../controller/User";
 import Comment from "../../components/blocks/comment";
-import { ThumbUp } from "@mui/icons-material";
+import { Delete, Edit, EditAttributes, ThumbUp } from "@mui/icons-material";
 import LikeButton from "../../components/likeButton";
 
 function PostDetail() {
@@ -29,6 +29,15 @@ function PostDetail() {
   const [commentsUser, setcommentsUser] = useState([]);
   const [canComment, setCanComment] = useState(false);
   const [posterName, setPosterName] = useState("");
+  const [isMine, setIsMine] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const navigate = useNavigate();
+
+  const deleteSubmit = async () => {
+    const docRef = doc(firebase.db, "posts", id);
+    deleteDoc(docRef);
+    navigate("/");
+  }; 
 
   const submitComment = async () => {
     PostModel.addComment(id, commentBody);
@@ -37,21 +46,27 @@ function PostDetail() {
 
 
   useEffect(() => {
+    const admin_check = async () => {
+        const docRef = doc(firebase.db, "users", firebase.auth.currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        setIsAdmin(docSnap.data().userType == "admin");
+    };
 
     const func = async () => {
-      onSnapshot(doc(firebase.db, "posts", id), (doc) => { 
+      onSnapshot(doc(firebase.db, "posts", id), (doc) => {
         setPostData(doc.data());
 
         if (doc.data().comments) {
           const arr = doc.data().comments.map((element, index) => {
-            return <Comment key={index} owner={id} index={index}  data={element} />;
+            return <Comment key={index} owner={id} index={index} data={element} />;
           });
           setComments(arr);
         }
-        setPostRead(true); 
+        setPostRead(true);
       });
       const isLoggedIn = await user.isLoggedIn();
-      setCanComment(isLoggedIn); 
+      setCanComment(isLoggedIn);
+      admin_check();
     };
 
 
@@ -61,16 +76,21 @@ function PostDetail() {
 
   useEffect(() => {
     const func = async () => {
-        const docRef = doc(firebase.db, "users", postData.userId);
-        const snap = await getDoc(docRef);
-        try {
-          setPosterName(snap.data().displayName);
-        } catch (error) {
-          
+      if (firebase.auth.currentUser) {
+        if (firebase.auth.currentUser.uid === postData.userId) {
+          setIsMine(true);
         }
       }
+      const docRef = doc(firebase.db, "users", postData.userId);
+      const snap = await getDoc(docRef);
+      try {
+        setPosterName(snap.data().displayName);
+      } catch (error) {
+
+      }
+    }
     func();
-  },[postData])
+  }, [postData])
 
   return (
     <main>
@@ -107,10 +127,22 @@ function PostDetail() {
               sx={{
                 width: "60%"
               }}
-              >
+            >
               <ButtonGroup size="lg">
-                { postData &&
-                  <LikeButton id={id} data={postData}/>
+                {postData &&
+                  <LikeButton id={id} data={postData} />
+                }
+                {
+                  isMine &&
+                  <Button onClick={() => navigate("/post/edit/" + id)}>
+                    <Edit />
+                  </Button>
+                }
+                {
+                  isAdmin &&
+                  <Button onClick={deleteSubmit}>
+                    <Delete color="error"/>
+                  </Button>
                 }
               </ButtonGroup>
               <Input
