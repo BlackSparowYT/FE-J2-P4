@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import firebase from '../../firebase.js'
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom';
 import Card from "@mui/joy/Card";
 import Button from "@mui/joy/Button";
@@ -9,6 +9,7 @@ import IconButton from "@mui/joy/IconButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Snackbar from '@mui/joy/Snackbar';
+import userController from '../../controller/User.js';
 
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
     const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
-    
+
     const GoogleSignIn = async (e) => {
         const provider = await new GoogleAuthProvider();
         Promise.resolve(signInWithPopup(firebase.auth, provider)).then((value) => {
@@ -31,17 +32,19 @@ const Login = () => {
         setShowPasswordBool(!showPasswordBool);
     };
 
-
     const signIn = async () => {
         setLoading(true);
-        try {
-            await signInWithEmailAndPassword(firebase.auth, email, password)
-            navigate('/');
-        } catch (err) {
-            console.error(err);
-            navigate('/');
-        }
-        setLoading(false);
+        const fetchUserName = async () => {
+            const user = await userController.login(email, password);
+            if (user == true) {
+                navigate("/");
+            } else {
+                setErrorMessage(user);
+            }
+            setLoading(false);
+        };
+
+        fetchUserName();
     }
 
     return (
@@ -52,7 +55,6 @@ const Login = () => {
                 onClose={() => { setOpen(false) }}
                 color='danger'
             >
-                Wrong password or email
             </Snackbar>
             <section className="vlx-login vlx-auth">
                 <div className='container'>

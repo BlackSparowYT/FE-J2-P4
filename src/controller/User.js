@@ -1,6 +1,7 @@
 import {
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    signOut
 } from "firebase/auth";
 import firebase from "../firebase";
 import {
@@ -15,13 +16,28 @@ import {
 
 class UserClass {
     login = async (mail, password) => {
-        await signInWithEmailAndPassword(firebase.auth, mail, password)
-            .then((userCredential) => {
-                return true;
-            })
-            .catch((error) => {
-                return false;
-            });
+        try {
+            await signInWithEmailAndPassword(firebase.auth, mail, password);
+            return true;
+        } catch (error) {
+            if (error.code === "auth/user-not-found") {
+                return "Geen gebruiker gevonden met dit emailadres";
+            } else if (error.code === "auth/wrong-password") { 
+                return "Wachtwoord is niet correct";
+            } else if (error.code === "auth/invalid-email") {
+                return "Email is niet geldig";
+            } else if (error.code === "auth/user-disabled") {
+                return "Gebruiker is uitgeschakeld";
+            } else if (error.code === "auth/too-many-requests") {
+                return "Te veel inlogpogingen, probeer het later opnieuw";
+            } else if (error.code === "auth/invalid-credential") { 
+                return "Wachtwoord of Email is niet correct";
+            } else { 
+                console.error(error.code);
+                return null;
+            }
+        }
+
     }
 
     logout = async () => {
@@ -106,7 +122,6 @@ class UserClass {
             if (userDoc.exists()) {
                 return userDoc.data().displayName;
             } else {
-                console.error("No such user!");
                 return "[deleted]";
             }
         } catch {
@@ -144,18 +159,18 @@ class UserClass {
                 displayName: displayName
             });
 
-            return true; 
+            return true;
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 return 'Email is al in gebruik';
-            } else if ( error.code === "auth/invalid-email") {
+            } else if (error.code === "auth/invalid-email") {
                 return 'Email is niet geldig';
-            } else if ( error.code === "auth/weak-password") {
+            } else if (error.code === "auth/weak-password") {
                 return 'Wachtwoord is te zwak (minimaal 6 karakters)';
             } else {
                 console.log(error.code);
                 return null;
-            } 
+            }
         }
     }
 
@@ -168,6 +183,8 @@ class UserClass {
             console.warn("User is not logged in, log in before removing yourself as user");
         }
     }
+
+  
 }
 
 const user = new UserClass();

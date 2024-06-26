@@ -3,23 +3,29 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faFolderOpen, faHouse, faRightFromBracket, faRightToBracket, faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import firebase from "../firebase";
-import user from "../controller/User";
+import userController from "../controller/User";
+import { doc, onSnapshot } from "firebase/firestore";
 
 function Sidebar(props) {
   const [userName, setUserName] = useState("");
 
-
   useEffect(() => {
+
     return firebase.auth.onAuthStateChanged(user => {
       if (user.providerData[0].providerId === "google.com") {
-        setUserName(user);
+        setUserName(user.displayName);
       } else {
-        setUserName(firebase.auth.currentUser);
-        console.log(userName);
+        const fetchUserName = async () => {
+          const name = await userController.getUserName();
+          setUserName(name);
+        };
+        fetchUserName();
+        onSnapshot(doc(firebase.db, "users", firebase.auth.currentUser.uid), (snapshot) => {
+          setUserName(snapshot.data().displayName);
+        });
       }
-
     });
-  });
+  }, []);
 
   const LinkTo = (to, icon, title) => {
     return (
@@ -28,6 +34,7 @@ function Sidebar(props) {
       </Link>
     );
   };
+
 
   return (
     <header>
@@ -61,7 +68,8 @@ function Sidebar(props) {
           {props.isloggedin ?
             <>
               {LinkTo('/account/settings', faGear, 'Settings')}
-              {LinkTo('/account', faRightFromBracket, userName.displayName || 'Loading...')}
+
+              {LinkTo('/account', faRightFromBracket, userName || 'Loading...')}
             </>
             :
             LinkTo('/auth/login', faRightToBracket, 'Login')
