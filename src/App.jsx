@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import firebase from "./firebase.js";
 
 // Layout
 import Sidebar from "./components/sidebar.jsx";
-// import Footer from './components/footer.jsx';
 
 // Pages
 import Error404 from './pages/404.jsx';
@@ -26,7 +25,6 @@ import Logout from "./pages/auth/logout.jsx";
 // Account
 import Account from "./pages/account/main.jsx";
 import Settings from "./pages/account/settings.jsx";
-import user from "./controller/User.js";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,42 +32,38 @@ function App() {
     const location = useLocation();
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        onAuthStateChanged(getAuth(), (user) => {
+        const unsubscribe = onAuthStateChanged(firebase.auth, (user) => {
             if (user) {
                 setIsLoggedIn(true);
             } else {
                 setIsLoggedIn(false);
             }
+
+            const url = window.location.pathname;
+            let regex = /^\/auth\/(login|register|logout|register\/school)$/;
+
+            if (regex.test(url)) {
+                setShowSidebar(false);
+            } else {
+                setShowSidebar(true);
+            }
+
+            if (
+                url.includes("/account") ||
+                url.includes("/post/add/") ||
+                url.includes("/post/edit/") ||
+                url.includes("/register/school")
+            ) {
+                if (!user) {
+                    navigate("/");
+                }
+            }
         });
 
-        const url = window.location.pathname;
-
-        let regex = /^\/auth\/(login|register|logout|register\/school)$/;
-
-        if (regex.test(url)) {
-            setShowSidebar(false);
-        } else {
-            setShowSidebar(true);
-        }
-
-
-        console.log(isLoggedIn);
-        if (
-            url.includes("/account") ||
-            url.includes("/post/add/") ||
-            url.includes("/post/edit/") ||
-            url.includes("/register/school")
-        ) {
-            if (!isLoggedIn) {
-                navigate("/");
-            }
-        }
-    }, [firebase.auth.currentUser, location]);
-
-
-
+        // Clean up the subscription on unmount
+        return () => unsubscribe();
+    }, [location, navigate]);
 
     return (
         <>
@@ -85,7 +79,7 @@ function App() {
 
                 <Route path='/post/:id' Component={PostDetail} />
                 <Route path='/post/add' Component={PostAdd} />
-                <Route path='/post/edit/:id' Component={PostAdd} />
+                <Route path='/post/edit/:id' Component={PostEdit} />
 
                 <Route path="/account" Component={Account} />
                 <Route path="/account/settings" Component={Settings} />
@@ -94,7 +88,6 @@ function App() {
                 <Route path="/auth/register" Component={Register} />
                 <Route path="/auth/register/school" Component={RegisterSchool} />
                 <Route path="/auth/logout" Component={Logout} />
-
             </Routes>
         </>
     );
