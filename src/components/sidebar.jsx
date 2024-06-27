@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faFolderOpen, faHouse, faRightFromBracket, faRightToBracket, faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import firebase from "../firebase";
@@ -8,6 +8,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 
 function Sidebar(props) {
   const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -27,13 +28,26 @@ function Sidebar(props) {
     });
   }, []);
 
-    const LinkTo = (to, icon, title) => {
-        return (
-            <Link className="item" to={to}>
-                <FontAwesomeIcon icon={icon} /><p>{title}</p>
-            </Link>
-        );
+  const LinkTo = (to, icon, title) => {
+    const handleIconClick = (e) => {
+      e.preventDefault();
+      if (icon === faRightFromBracket) {
+        navigate("/auth/logout");
+      }
     };
+
+    const handleTitleClick = (e) => {
+      e.preventDefault();
+      navigate(to);
+    };
+
+    return (
+      <Link className="item">
+        <FontAwesomeIcon icon={icon} onClick={handleIconClick} />
+        <p onClick={handleTitleClick}>{title}</p>
+      </Link>
+    );
+  };
 
 
   return (
