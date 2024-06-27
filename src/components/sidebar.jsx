@@ -1,8 +1,61 @@
+<<<<<<< Updated upstream
 import React from "react";
 import { Link } from "react-router-dom";
 
 function Header() {
   localStorage.setItem("login", true);
+=======
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faFolderOpen, faHouse, faRightFromBracket, faRightToBracket, faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
+import firebase from "../firebase";
+import userController from "../controller/User";
+import { doc, onSnapshot } from "firebase/firestore";
+
+function Sidebar(props) {
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+
+    return firebase.auth.onAuthStateChanged(user => {
+      if (user.providerData[0].providerId === "google.com") {
+        setUserName(user.displayName);
+      } else {
+        const fetchUserName = async () => {
+          const name = await userController.getUserName();
+          setUserName(name);
+        };
+        fetchUserName();
+        onSnapshot(doc(firebase.db, "users", firebase.auth.currentUser.uid), (snapshot) => {
+          setUserName(snapshot.data().displayName);
+        });
+      }
+    });
+  }, []);
+
+  const LinkTo = (to, icon, title) => {
+    const handleIconClick = (e) => {
+    e.preventDefault();
+    if (icon === faRightFromBracket) {
+      navigate("/auth/logout");
+    }
+  };
+
+  const handleTitleClick = (e) => {
+    e.preventDefault();
+    navigate(to);
+  };
+
+  return (
+    <Link className="item" >
+      <FontAwesomeIcon icon={icon} onClick={handleIconClick} />
+      <p onClick={handleTitleClick}>{title}</p>
+    </Link>
+  );
+  };
+>>>>>>> Stashed changes
 
   const isLoggedIn = localStorage.getItem("login") === "true";
 
