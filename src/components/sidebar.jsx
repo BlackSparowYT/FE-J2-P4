@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faFolderOpen, faHouse, faRightFromBracket, faRightToBracket, faGear, faGamepad } from "@fortawesome/free-solid-svg-icons";
 import user from "../controller/User";
+import firebase from "../firebase";
 
 function Sidebar(props) {
   const [userName, setUserName] = useState("");
@@ -14,7 +15,7 @@ function Sidebar(props) {
     };
 
     fetchUserName();
-  }, [props.isloggedin]);
+  }, [firebase.auth.currentUser]);
 
   const LinkTo = (to, icon, title) => {
     return (
@@ -26,7 +27,6 @@ function Sidebar(props) {
 
   return (
     <header>
-      {props.isloggedin}
       <div className="sidebar">
         <div className="sidebar__logo">
           <h2>Vak Roddels</h2>
@@ -44,7 +44,7 @@ function Sidebar(props) {
                 <i className="vlx-icon vlx-icon--bell"></i>
                 <p>Meldingen</p>
             </Link>
-            {!isLoggedIn ? (
+            {!firebase.auth.currentUser ? (
                 <Link className="item" to={"/post/add"}>
                     <i className="vlx-icon vlx-icon--plus"></i>
                     <p>Roddel!</p>
@@ -53,7 +53,7 @@ function Sidebar(props) {
             }
         </div>
         <div className="sidebar__items sidebar__items--bottom">
-          {props.isloggedin ?
+          {firebase.auth.currentUser ?
             <>
               {LinkTo('/auth/settings', faGear, 'Settings')}
               {LinkTo('/account', faRightFromBracket, userName || 'Loading...')}
