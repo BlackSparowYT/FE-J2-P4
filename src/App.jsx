@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Routes, Route, useLocation } from "react-router-dom";
 import firebase from "./firebase.js";
 
 // Layout
@@ -24,8 +23,8 @@ import Register from "./pages/auth/register.jsx";
 import Logout from "./pages/auth/logout.jsx";
 
 // Account
-import Account from "./pages/auth/account.jsx";
-import Settings from "./pages/auth/settings.jsx";
+import Account from "./pages/account/main.jsx";
+import Settings from "./pages/account/settings.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -81,7 +80,7 @@ function App() {
         
         <Route path='/post/:id' Component={PostDetail} />
         <Route path='/post/add' Component={PostAdd} />
-        <Route path='/post/edit/:id' Component={PostAdd} />
+        <Route path='/post/edit/:id' Component={PostEdit} />
           
         <Route path="/account" Component={Account} />
         <Route path="/account/settings" Component={Settings} />

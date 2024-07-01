@@ -1,4 +1,5 @@
 import { set } from 'firebase/database'
+import Parser from 'html-react-parser'
 import { React, useEffect, useState } from 'react'
 import Post from '../cards/post'
 
@@ -10,7 +11,7 @@ function BlockPosts(props) {
     const block = {};
     block.id = args.block.id ?? "block-" + block_name + "-" + (Math.random() + 1).toString(36).substring(7);
     block.name = block_name;
-    block.title = args.block.title;
+    block.title = args.block.title ?? "";
 
 
     const posts = args.posts;
@@ -21,7 +22,7 @@ function BlockPosts(props) {
             <div className="container">
                 { block.title != "" ?
                     <div className="vlx-text">
-                        {block.title}
+                        {Parser(block.title)}
                     </div>
                 : null}
                 <div className="inner d-grid g-20">
