@@ -86,7 +86,7 @@ function Search() {
                         <input onChange={async (e) => setResult(await filterItems(e.target.value.toLowerCase()))} type="text" placeholder='Zoeken...' />     
                     </div>
                     <div className="inner d-grid g-20">
-                        { result.map((item) => (
+                        { result?.map((item) => (
                             item.type == "user" ?
                                 <UserCard key={item.uid} args={item} />
                             :

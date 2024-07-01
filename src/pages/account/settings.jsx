@@ -36,29 +36,29 @@ const settings = () => {
 
     return (
         <main>
-            <section className="vlx-account">
+            <section className="vlx-settings">
                 <div className='container'>
                     <div className="inner">
                         <h2>Account</h2>
                         <div>
 
-                        <h3>Vul hier je school ID in</h3>
-                        <input type="text" id="schoolID" name="schoolID" placeholder={'school ID'} onChange={(e) => setSchoolID(e.target.value)} />
-                        <Button
-                            variant="solid"
-                            sx={{
-                                width: "30%",
-                                background: "#255c0a",
-                                borderColor: "#255c0a",
-                                ":hover": {
-                                    backgroundColor: "#255c0a",
-                                },
-                            }}
-                            loading={isLoading}
-                            onClick={() => userController.setSchoolID(schoolID)}
-                        >
-                            Set School id
-                        </Button>
+                            <h3>Vul hier je school ID in</h3>
+                            <input type="text" id="schoolID" name="schoolID" placeholder={'school ID'} onChange={(e) => setSchoolID(e.target.value)} />
+                            <Button
+                                variant="solid"
+                                sx={{
+                                    width: "30%",
+                                    background: "#255c0a",
+                                    borderColor: "#255c0a",
+                                    ":hover": {
+                                        backgroundColor: "#255c0a",
+                                    },
+                                }}
+                                loading={isLoading}
+                                onClick={() => userController.setSchoolID(schoolID)}
+                            >
+                                Set School id
+                            </Button>
                         </div>
                     </div>
 
