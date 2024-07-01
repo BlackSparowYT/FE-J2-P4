@@ -26,13 +26,11 @@ const Account = () => {
     }, []);
 
 
-    
-
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
         async function fetchData() {
-            setPosts( await PostModel.getAllByLoggedInUser())
+            setPosts(await PostModel.getAllByLoggedInUser())
         }
         fetchData()
     }, [])
@@ -52,7 +50,7 @@ const Account = () => {
                         <h1>Mijn account</h1>
                     </div>
                 </section>
-                <PostsBlock args={args}/>
+                <PostsBlock args={args} />
             </main>
         </>
     )
